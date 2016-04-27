@@ -21,120 +21,134 @@
         <DataTemplate DataType="{x:Type local:PassphraseDialogViewModel}">
             <local:PassphraseDialogView/>
         </DataTemplate>
+        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
+        <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+        <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid x:Name="grid" Background="Transparent " Height="40">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="41"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="textBlock" HorizontalAlignment="Stretch" Height="20" Margin="0,10,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Top" Width="Auto" TextAlignment="Left" Grid.Column="1" Foreground="#FFA9B4BF" Grid.ColumnSpan="1"/>
+                            <Rectangle x:Name="rectangle" Fill="#FF2ED8A3" HorizontalAlignment="Left" Stroke="{x:Null}" VerticalAlignment="Stretch" Width="5" RenderTransformOrigin="0.391,0.508" Margin="0" Visibility="Hidden"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="grid" Value="#FF09182D"/>
+                                <Setter Property="Visibility" TargetName="rectangle" Value="Visible"/>
+                                <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="grid" Value="#FF09182D"/>
+                                <Setter Property="Visibility" TargetName="rectangle" Value="Visible"/>
+                                <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
-    <Grid>
-        <UserControl Panel.ZIndex="1000" KeyboardNavigation.TabNavigation="Cycle" KeyboardNavigation.ControlTabNavigation="Cycle">
-            <UserControl.Style>
-                <Style TargetType="UserControl">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding VisibleDialogContent}" Value="{x:Null}">
-                            <Setter Property="Visibility" Value="Hidden"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </UserControl.Style>
-            <UserControl.Background>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightLightColorKey}}" Opacity="0.7"/>
-            </UserControl.Background>
-            <UserControl MinHeight="180" VerticalAlignment="Center">
-                <UserControl.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                </UserControl.Background>
-                <ContentControl Content="{Binding VisibleDialogContent}" KeyboardNavigation.IsTabStop="False" Width="500" Margin="0 6"/>
-            </UserControl>
-        </UserControl>
-
-        <DockPanel>
-            <DockPanel.Resources>
-                <DataTemplate x:Key="recentAccountTemplate">
-                    <local:RecentAccountView/>
-                </DataTemplate>
-
-                <DataTemplate DataType="{x:Type local:RecentActivityViewModel}">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <local:RecentActivityView/>
-                    </ScrollViewer>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type local:AccountViewModel}">
-                    <local:AccountView/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type local:TransactionViewModel}">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <local:TransactionView/>
-                    </ScrollViewer>
-                </DataTemplate>
-            </DockPanel.Resources>
-
-            <DockPanel DockPanel.Dock="Left" Width="220">
-                <DockPanel.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                </DockPanel.Background>
-                <Label DockPanel.Dock="Top" FontSize="18" HorizontalAlignment="Left" Margin="3 6">
-                    <TextBlock>
-                            <Run Text="Block"/>
-                            <Run Text="{Binding SyncedBlockHeight, StringFormat='{}{0:#,0}', FallbackValue='0'}"/>
-                    </TextBlock>
-                </Label>
-
-                <local:LockableToggleButton DockPanel.Dock="Top"
-                                            Margin="0 6" Padding="9 6"
-                                            BorderThickness="0"
-                                            Background="Transparent"
-                                            FontSize="14"
-                                            HorizontalContentAlignment="Stretch"
-                                            Content="Recent activity"
-                                            Command="{Binding NavigateBack}" Checked="RecentActivityToggleButton_Checked"/>
-
-                <DockPanel DockPanel.Dock="Top" Margin="0 6">
-                    <Label DockPanel.Dock="Left" Content="Accounts" FontSize="14" Margin="3 0"/>
-                    <Button
-                        BorderThickness="0"
-                        Background="Transparent"
-                        Content="+"
-                        FontWeight="Bold"
-                        FontSize="14"
-                        Command="{Binding CreateAccountCommand}"
-                        Padding="8,0"
-                        Margin="0 0 9 0"
-                        HorizontalContentAlignment="Center"
-                        HorizontalAlignment="Right"/>
-                </DockPanel>
-
-                <Separator DockPanel.Dock="Top" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="9 0 9 6"/>
-                <DockPanel>
-                    <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Stretch" Margin="3 0 3 3">
-                        <Label DockPanel.Dock="Left" Content="Total"/>
-                        <Label HorizontalContentAlignment="Right" Content="{Binding Path=TotalBalance, Mode=OneWay}" FontFamily="Consolas"/>
-                    </DockPanel>
-                    <Separator DockPanel.Dock="Bottom" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="9 5"/>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ItemsControl ItemsSource="{Binding RecentAccounts}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:LockableToggleButton Margin="0" Padding="9 6" BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Stretch" Checked="AccountToggleButton_Checked">
-                                        <DockPanel>
-                                            <TextBlock DockPanel.Dock="Left" TextTrimming="CharacterEllipsis" Text="{Binding AccountName}"/>
-                                            <TextBlock HorizontalAlignment="Right" Text="{Binding BalanceString}" FontFamily="Consolas"/>
-                                        </DockPanel>
-                                    </local:LockableToggleButton>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </DockPanel>
-            </DockPanel>
-
-            <!--<StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-            </StackPanel>-->
-
-            <ContentControl Content="{Binding VisibleContent}" Margin="12 6"/>
-        </DockPanel>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="#FF0C1E3E">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+            <Image Margin="15.333,22.667,97.667,17.333" Source="Images/paymetheus - 137x20.png" Stretch="Fill"/>
+            <ListBox Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Style="{DynamicResource ListBoxStyle}">
+                <ListBox.Resources>
+                    <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
+                    <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
+                    <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
+                    <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
+                    <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+                        <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBox}">
+                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}" Margin="-1">
+                                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
+                                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsGrouping" Value="true"/>
+                                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Resources>
+                <ListBoxItem Content="Overview" Style="{DynamicResource ListBoxItemStyle}" IsSelected="True"/>
+                <ListBoxItem Content="Acccounts" Style="{DynamicResource ListBoxItemStyle}"/>
+                <ListBoxItem Content="Send" Style="{DynamicResource ListBoxItemStyle}"/>
+                <ListBoxItem Content="Request" Style="{DynamicResource ListBoxItemStyle}"/>
+            </ListBox>
+            <Path Data="M52.666667,460 C55.333333,453.33333 125.33317,387.3335 125.33317,387.3335 L199.33249,461.33283 z" Fill="#FF69D5F7" HorizontalAlignment="Center" Height="3.868" Margin="121.166,0.547,121.167,0" Grid.Row="2" Stretch="Fill" Stroke="{x:Null}" VerticalAlignment="Top" Width="7.667"/>
+            <Rectangle Fill="#FF69D5F7" HorizontalAlignment="Center" Height="1" Margin="20,4.166,20,0" Grid.Row="2" Stroke="{x:Null}" VerticalAlignment="Top" Width="210"/>
+            <TextBlock HorizontalAlignment="Left" Margin="20,15.5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Total Balance" VerticalAlignment="Top" FontSize="8" Foreground="#FF69D5F7" Height="8.867"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,15.734,40.35,0" Grid.Row="2" TextWrapping="Wrap" Text="1,567.457" VerticalAlignment="Top" FontSize="8" Foreground="#FF2ED8A3" TextAlignment="Right" Height="8.867"/>
+            <TextBlock HorizontalAlignment="Left" Margin="214.65,15.5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="DCR" VerticalAlignment="Top" FontSize="8" Foreground="#FF69D5F7" Height="8.867" Width="12.787"/>
+            <Rectangle Fill="#FF09182D" HorizontalAlignment="Left" Margin="0,34.667,0,0" Grid.Row="2" Stroke="{x:Null}" Width="250"/>
+            <TextBlock HorizontalAlignment="Left" Margin="20,39,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Latest Block" VerticalAlignment="Top" FontSize="8" Foreground="#FF69D5F7" Height="8.867" Width="43.407"/>
+            <TextBlock HorizontalAlignment="Left" Margin="68.407,39,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding SyncedBlockHeight, StringFormat='{}{0:#,0}', FallbackValue='0'}" VerticalAlignment="Top" FontSize="8" Foreground="#FF2ED8A3" Width="71.407" Height="8.867"/>
+            <TextBlock HorizontalAlignment="Right" Margin="0,40.674,20,0" Grid.Row="2" TextWrapping="Wrap" Text="1 min ago" VerticalAlignment="Top" FontSize="8" Foreground="#FF69D5F7" Height="8.867" Width="33.377" TextAlignment="Right"/>
+        </Grid>
+        <Frame Content="Frame" Grid.Column="1" Source="/PaymetheusDesign;component/Request.xaml"/>
     </Grid>
 </UserControl>
