@@ -4,14 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paymetheus"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             
+	Background="{DynamicResource ColorDarkBlueFull}" 
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel FocusManager.FocusedElement="{Binding ElementName=textBox}">
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Back" Command="{Binding BackCommand}" Width="100" Margin="6,12,3,6" Padding="10 2"/>
             <Button Content="Confirm" IsDefault="True" Command="{Binding ConfirmSeedCommand}" Width="100" Margin="6,12,3,6" Padding="10 2"/>
         </StackPanel>
-        <Label DockPanel.Dock="Top" FontSize="18" Content="Confirm backup"/>
+        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="0,219.726,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" Height="95.76" FontSize="21.333" Foreground="White" Text="Confirm backup" />
         <TextBox x:Name="textBox" Text="{Binding Input, Mode=OneWayToSource}"
                  local:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text"/>
     </DockPanel>

@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paymetheus"
              mc:Ignorable="d" 
+             
+	Background="{DynamicResource ColorDarkBlueFull}" 
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel FocusManager.FocusedElement="{Binding ElementName=PasswordBoxPublicPassphrase}">
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">

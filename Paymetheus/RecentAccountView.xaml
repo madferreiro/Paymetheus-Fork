@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:Paymetheus"
              xmlns:btc="clr-namespace:Paymetheus.Decred"
              mc:Ignorable="d" 
+             
+	Background="{DynamicResource ColorDarkBlueFull}" 
              d:DesignHeight="35" d:DesignWidth="200">
     <DockPanel>
         <!-- Text must be vertically aligned at the bottom so baselines line up.-->
