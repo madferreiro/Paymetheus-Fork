@@ -134,6 +134,6 @@
             <TextBlock HorizontalAlignment="Left" Margin="68.407,39,0,0" Grid.Row="2" TextWrapping="Wrap" Text="1,567.457" VerticalAlignment="Top" FontSize="8" Foreground="#FF2ED8A3" Width="71.407" Height="8.867"/>
             <TextBlock HorizontalAlignment="Right" Margin="0,40.674,20,0" Grid.Row="2" TextWrapping="Wrap" Text="1 min ago" VerticalAlignment="Top" FontSize="8" Foreground="#FF69D5F7" Height="8.867" Width="33.377" TextAlignment="Right"/>
         </Grid>
-        <Frame Content="Frame" Grid.Column="1" Source="/PaymetheusDesign;component/History.xaml"/>
+        <Frame Content="Frame" Grid.Column="1" />
     </Grid>
 </UserControl>
