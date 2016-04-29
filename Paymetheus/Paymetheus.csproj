@@ -162,6 +162,17 @@
     <Compile Include="CreateOrImportSeedView.xaml.cs">
       <DependentUpon>CreateOrImportSeedView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DTO\RecentActivity.cs" />
+    <Compile Include="Helpers\Navigator.cs" />
+    <Compile Include="Overview.xaml.cs">
+      <DependentUpon>Overview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OverviewDeeper.xaml.cs">
+      <DependentUpon>OverviewDeeper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page.xaml.cs">
+      <DependentUpon>Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StartupWizard.cs" />
     <Compile Include="ConnectionWizardView.xaml.cs">
       <DependentUpon>ConnectionWizardView.xaml</DependentUpon>
@@ -222,6 +233,9 @@
     <Compile Include="ConsensusServerConnectionOptionsView.xaml.cs">
       <DependentUpon>ConsensusServerConnectionOptionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\TransactionUserControl.xaml.cs">
+      <DependentUpon>TransactionUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModelMessage.cs" />
     <Compile Include="WizardDialogViewModelBase.cs" />
@@ -259,6 +273,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImportDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Overview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OverviewDeeper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ConsensusServerConnectionOptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TransactionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

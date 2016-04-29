@@ -138,6 +138,8 @@
                 <ListBoxItem Content="Acccounts" Style="{DynamicResource ListBoxItemStyle}"/>
                 <ListBoxItem Content="Send" Style="{DynamicResource ListBoxItemStyle}"/>
                 <ListBoxItem Content="Request" Style="{DynamicResource ListBoxItemStyle}"/>
+                <ListBoxItem Content="History" Style="{DynamicResource ListBoxItemStyle}"/>
+                <ListBoxItem Content="Unspent" Style="{DynamicResource ListBoxItemStyle}"/>
             </ListBox>
             <Path Data="M52.666667,460 C55.333333,453.33333 125.33317,387.3335 125.33317,387.3335 L199.33249,461.33283 z" Fill="#FF69D5F7" HorizontalAlignment="Center" Height="3.868" Margin="121.166,0.547,121.167,0" Grid.Row="2" Stretch="Fill" Stroke="{x:Null}" VerticalAlignment="Top" Width="7.667"/>
             <Rectangle Fill="#FF69D5F7" HorizontalAlignment="Center" Height="1" Margin="20,4.166,20,0" Grid.Row="2" Stroke="{x:Null}" VerticalAlignment="Top" Width="210"/>
@@ -149,6 +151,6 @@
             <TextBlock HorizontalAlignment="Left" Margin="68.407,39,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding SyncedBlockHeight, StringFormat='{}{0:#,0}', FallbackValue='0'}" VerticalAlignment="Top" FontSize="8" Foreground="#FF2ED8A3" Width="71.407" Height="8.867"/>
             <TextBlock HorizontalAlignment="Right" Margin="0,40.674,20,0" Grid.Row="2" TextWrapping="Wrap" Text="1 min ago" VerticalAlignment="Top" FontSize="8" Foreground="#FF69D5F7" Height="8.867" Width="33.377" TextAlignment="Right"/>
         </Grid>
-        <Frame Content="Frame" Grid.Column="1" />
+        <Frame Name="ContentHolder"  Content="Frame" Grid.Column="1" Source="{Binding SelectedView, FallbackValue=/Paymetheus;component/Overview.xaml}" NavigationUIVisibility="Hidden" />
     </Grid>
 </UserControl>

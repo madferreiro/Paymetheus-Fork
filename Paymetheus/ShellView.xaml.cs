@@ -2,6 +2,7 @@
 // Copyright (c) 2016 The Decred developers
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
+using Paymetheus.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace Paymetheus
         public ShellView()
         {
             InitializeComponent();
+            Navigator.GetInstance(ContentHolder);
         }
 
         private LockableToggleButton _toggledSidebarButton;
