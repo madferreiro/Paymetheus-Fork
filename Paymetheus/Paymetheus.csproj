@@ -170,9 +170,6 @@
     <Compile Include="OverviewDeeper.xaml.cs">
       <DependentUpon>OverviewDeeper.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page.xaml.cs">
-      <DependentUpon>Page.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StartupWizard.cs" />
     <Compile Include="ConnectionWizardView.xaml.cs">
       <DependentUpon>ConnectionWizardView.xaml</DependentUpon>
@@ -281,10 +278,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OverviewDeeper.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
