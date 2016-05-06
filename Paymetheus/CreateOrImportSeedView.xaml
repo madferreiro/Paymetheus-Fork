@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paymetheus"
              mc:Ignorable="d" 
-	Background="{DynamicResource ColorDarkBlueFull}" d:DesignWidth="842" d:DesignHeight="718">
+	         Background="{DynamicResource ColorDarkBlueFull}" 
+             d:DesignWidth="842" d:DesignHeight="718"
+             >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>

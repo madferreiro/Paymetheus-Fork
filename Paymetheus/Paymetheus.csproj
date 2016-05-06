@@ -164,6 +164,8 @@
     </Compile>
     <Compile Include="DTO\RecentActivity.cs" />
     <Compile Include="Helpers\Navigator.cs" />
+    <Compile Include="Helpers\PasswordBoxWaterMark.cs" />
+    <Compile Include="Helpers\Watermark.cs" />
     <Compile Include="Overview.xaml.cs">
       <DependentUpon>Overview.xaml</DependentUpon>
     </Compile>
@@ -298,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RenameAccountDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,23 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Paymetheus"
+             xmlns:pLocal="clr-namespace:Paymetheus"
              mc:Ignorable="d" 
              Background="{DynamicResource ColorDarkBlueFull}" 
-             d:DesignHeight="200" d:DesignWidth="500">
-    <DockPanel FocusManager.FocusedElement="{Binding ElementName=textBox}">
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="OK" IsDefault="True" Command="{Binding Execute}" Width="100" Margin="6 12 3 6" Padding="10 2"/>
-            <Button Content="Cancel" IsCancel="True" Command="{Binding HideDialogCommand}" Width="100" Margin="3 12 6 6" Padding="10 2"/>
-        </StackPanel>
-        <StackPanel>
-            <Label Content="Create account" FontSize="18"/>
-            <Label Content="Account name:"/>
-            <TextBox Name="textBox" Margin="6 2" Padding="2"
+             d:DesignWidth="842" d:DesignHeight="718"
+             >
+    <Grid x:Name="LayoutRoot">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="532.452" Width="700" >
+            <Image Source="Images/paymetheus - 262x37.png" Stretch="Fill" Width="262" Height="37" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="219,24,219,0"/>
+            <DockPanel FocusManager.FocusedElement="{Binding ElementName=textBox}">
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="OK" IsDefault="True" Command="{Binding Execute}" Width="100" Margin="6 12 3 6" Padding="10 2"/>
+                    <Button Content="Cancel" IsCancel="True" Command="{Binding HideDialogCommand}" Width="100" Margin="3 12 6 6" Padding="10 2"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Foreground="White" Content="Create account" FontSize="18"/>
+                    <Label Foreground="White" Content="Account name:"/>
+                    <TextBox Name="textBox" Margin="6 2" Padding="2"
                      Text="{Binding AccountName, Mode=OneWayToSource}"
-                     local:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text"/>
-            <Label Content="Private passphrase:"/>
-            <PasswordBox Name="passphraseTextBox" PasswordChanged="passphraseTextBox_PasswordChanged" Margin="6 2" Padding="2"/>
+                     pLocal:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text"/>
+                    <Label Foreground="White" Content="Private passphrase:"/>
+                    <PasswordBox Name="passphraseTextBox" PasswordChanged="passphraseTextBox_PasswordChanged" Margin="6 2" Padding="2"/>
+                </StackPanel>
+            </DockPanel>
         </StackPanel>
-    </DockPanel>
+    </Grid>
 </UserControl>

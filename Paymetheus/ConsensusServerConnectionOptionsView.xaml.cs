@@ -2,6 +2,7 @@
 // Copyright (c) 2016 The Decred developers
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
+using Paymetheus.Helpers;
 using Paymetheus.Rpc;
 using System;
 using System.IO;
@@ -18,6 +19,8 @@ namespace Paymetheus
         public ConsensusServerConnectionOptionsView()
         {
             InitializeComponent();
+            Watermark.Set(Location, "localhost");
+            Watermark.Set(Username, "username");
         }
 
         private void TextBoxConsensusServerRpcPassword_PasswordChanged(object sender, RoutedEventArgs e)
