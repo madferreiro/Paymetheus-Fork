@@ -21,9 +21,9 @@ namespace Paymetheus.Helpers
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(PasswordBoxWaterMark), new UIPropertyMetadata(false, OnIsMonitoringChanged));
 
 
-        public static bool GetWatermarkText(DependencyObject obj)
+        public static string GetWatermarkText(DependencyObject obj)
         {
-            return (bool)obj.GetValue(WatermarkTextProperty);
+            return (string)obj.GetValue(WatermarkTextProperty);
         }
 
         public static void SetWatermarkText(DependencyObject obj, string value)
