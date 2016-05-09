@@ -23,8 +23,17 @@
                     <Button Content="Back" Command="{Binding BackCommand}" Width="100" Margin="6,12,3,6" Padding="10 2"/>
                     <Button Content="Confirm" IsDefault="True" Command="{Binding ConfirmSeedCommand}" Width="100" Margin="6,12,3,6" Padding="10 2"/>
                 </StackPanel>
-                <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="50,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" Height="50" FontSize="29" Foreground="White" Text="Confirm backup" />
-                <TextBox x:Name="textBox" Height="45.673" Width="610"  Text="{Binding Input, Mode=OneWayToSource}" local:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text"/>
+                <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="50,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" Height="40" FontSize="24" Foreground="White" Text="Confirm backup" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Visibility="{Binding UsePublicEncryption, Converter={StaticResource hiddenConverter}}" Width="610" Fill="#FFF4F4F5" Margin="0,0,0,0" RadiusY="5" RadiusX="5" Height="25" VerticalAlignment="Center" />
+                    <TextBox x:Name="textBox" Height="20" Width="600"  Text="{Binding Input, Mode=OneWayToSource}" local:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text"/>
+                </Grid>
             </DockPanel>
         </StackPanel>
     </Grid>

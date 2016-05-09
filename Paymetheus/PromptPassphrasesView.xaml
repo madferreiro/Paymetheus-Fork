@@ -54,7 +54,16 @@
 
             <Label FontSize="18" Content="Encrypt wallet" Foreground="White"/>
             <Label Content="Private passphrase" Foreground="White"/>
-            <PasswordBox x:Name="TextBoxPrivatePassphrase"  Margin="6 2" Padding="2" PasswordChanged="TextBoxPrivatePassphrase_PasswordChanged"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Rectangle Fill="#FFF4F4F5" Margin="0,0,0,0.449" RadiusY="5" RadiusX="5" Height="25" VerticalAlignment="Bottom" Grid.Row="2"/>
+                <PasswordBox x:Name="TextBoxPrivatePassphrase"  Margin="6 2" Padding="2" BorderBrush="{x:Null}" PasswordChanged="TextBoxPrivatePassphrase_PasswordChanged"/>
+            </Grid>
             <Label Grid.Column="0"  Margin="0 12 0 2">
                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#FFB7D1F0">
                     Public encryption encrypts public keys and other data that is
@@ -68,7 +77,16 @@
             </Label>
             <CheckBox Foreground="White" Content="Encrypt public data" IsChecked="{Binding UsePublicEncryption}" Margin="6 2"/>
             <Label Content="Public passphrase" Foreground="White" Visibility="{Binding UsePublicEncryption, Converter={StaticResource hiddenConverter}}"/>
-            <PasswordBox x:Name="TextBoxPublicPassphrase" Visibility="{Binding UsePublicEncryption, Converter={StaticResource hiddenConverter}}" Margin="6 2" Padding="2" PasswordChanged="TextBoxPublicPassphrase_PasswordChanged"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Rectangle Visibility="{Binding UsePublicEncryption, Converter={StaticResource hiddenConverter}}" Fill="#FFF4F4F5" Margin="0,0,0,0.449" RadiusY="5" RadiusX="5" Height="25" VerticalAlignment="Bottom" Grid.Row="2"/>
+                <PasswordBox x:Name="TextBoxPublicPassphrase" Visibility="{Binding UsePublicEncryption, Converter={StaticResource hiddenConverter}}" Margin="6 2" Padding="2" BorderBrush="{x:Null}" PasswordChanged="TextBoxPublicPassphrase_PasswordChanged"/>
+            </Grid>
             <Button Content="Encrypt" Command="{Binding CreateWalletCommand}" HorizontalAlignment="Center" Height="35.5" Margin="288.5,0" VerticalAlignment="Top" Width="123" Style="{DynamicResource ButtonBlue}" Foreground="#FF132F4B" Grid.Row="4"/>
         </StackPanel>
     </Grid>
