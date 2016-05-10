@@ -16,11 +16,19 @@ namespace Paymetheus
     /// </summary>
     public partial class ConsensusServerConnectionOptionsView : UserControl
     {
+
         public ConsensusServerConnectionOptionsView()
         {
             InitializeComponent();
             Watermark.Set(Location, "localhost");
             Watermark.Set(Username, "username");
+            TextboxConsensusServerRpcPassword.GotFocus += TextboxConsensusServerRpcPassword_GotFocus;
+            
+        }
+
+        private void TextboxConsensusServerRpcPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextboxConsensusServerRpcPassword.Clear();
         }
 
         private void TextBoxConsensusServerRpcPassword_PasswordChanged(object sender, RoutedEventArgs e)
