@@ -83,7 +83,7 @@
                 <Run Text="The seed should be formatted as a hexadecimal number (64 characters between 0-9 and A-F) or a list of mneumonic words."/>
             </TextBlock>
             <Rectangle Visibility="{Binding IsChecked,ElementName=ImportWallet,Converter={StaticResource b2v}}" Fill="#FFF4F4F5" Margin="0,0,0,0.449" RadiusY="5" RadiusX="5" Height="55" VerticalAlignment="Bottom" Grid.Row="2"/>
-            <TextBox Visibility="{Binding IsChecked,ElementName=ImportWallet,Converter={StaticResource b2v}}" Text="{Binding ImportedSeed, Mode=TwoWay}"  Height="22.667" Margin="20,18,20,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="{DynamicResource ColorDarkBlueFull}" FontSize="16" />
+            <TextBox Visibility="{Binding IsChecked,ElementName=ImportWallet,Converter={StaticResource b2v}}" Text="{Binding ImportedSeed, Mode=TwoWay}"  Height="22.667" Margin="20,18,20,0" Grid.Row="2" TextWrapping="Wrap" BorderThickness="0" VerticalAlignment="Top" Foreground="{DynamicResource ColorDarkBlueFull}" FontSize="16" />
             <Button Visibility="{Binding IsChecked,ElementName=ImportWallet,Converter={StaticResource b2v}}" Content="CONTINUE" Command="{Binding ContinueCommand}" HorizontalAlignment="Center" Height="35.5" Margin="288.5,0" VerticalAlignment="Top" Width="123" Style="{DynamicResource ButtonBlue}" Foreground="#FF132F4B" Grid.Row="4"/>
         </Grid>
     </Grid>

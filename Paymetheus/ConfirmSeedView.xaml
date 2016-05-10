@@ -32,7 +32,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Rectangle Visibility="{Binding UsePublicEncryption, Converter={StaticResource hiddenConverter}}" Width="610" Fill="#FFF4F4F5" Margin="0,0,0,0" RadiusY="5" RadiusX="5" Height="25" VerticalAlignment="Center" />
-                    <TextBox x:Name="textBox" BorderThickness="0" Height="20" Width="600"  Text="{Binding Input, Mode=OneWayToSource}" local:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text"/>
+                    <TextBox x:Name="textBox" BorderThickness="0" Height="20" Width="600" Margin="3" Text="{Binding Input, Mode=OneWayToSource}" local:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text" VerticalAlignment="Center" />
                 </Grid>
             </DockPanel>
         </StackPanel>
