@@ -11,11 +11,186 @@
     d:DesignWidth="842" 
     d:DesignHeight="718">
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resource.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <StackPanel>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="border" Property="BorderThickness" Value="1"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="LightBlue"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="helper:PasswordBoxWaterMark.IsMonitoring" Value="True"/>
+            <Setter Property="helper:PasswordBoxWaterMark.WatermarkText" Value="password" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="enterGotFocus" >
+                                <DoubleAnimation Duration="0:0:0" To=".0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+                            <Storyboard x:Key="exitGotFocus" >
+                                <DoubleAnimation Duration="0:0:0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+
+                            <Storyboard x:Key="enterHasText" >
+                                <DoubleAnimation Duration="0:0:0" From=".2" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+                            <Storyboard x:Key="exitHasText" >
+                                <DoubleAnimation Duration="0:0:0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border Name="Bd" 
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Margin="1" />
+                                <TextBlock x:Name="Message" Text="{TemplateBinding Tag}" FontStyle="Normal"
+                                       Foreground="Gray" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                       Margin="7,10,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="LightBlue"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="helper:PasswordBoxWaterMark.HasText" Value="False"/>
+                                    <Condition Property="IsFocused" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterGotFocus}"/>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitGotFocus}"/>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <Trigger Property="helper:PasswordBoxWaterMark.HasText" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterHasText}"/>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitHasText}"/>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WaterMarkTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="helper:PasswordBoxWaterMark.IsMonitoring" Value="True"/>
+            <Setter Property="helper:PasswordBoxWaterMark.WatermarkText" Value="Password" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="enterGotFocus" >
+                                <DoubleAnimation Duration="0:0:0.4" To=".2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+                            <Storyboard x:Key="exitGotFocus" >
+                                <DoubleAnimation Duration="0:0:0.4" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+
+                            <Storyboard x:Key="enterHasText" >
+                                <DoubleAnimation Duration="0:0:0.4" From=".2" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+                            <Storyboard x:Key="exitHasText" >
+                                <DoubleAnimation Duration="0:0:0.4" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border Name="Bd" 
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Margin="1" />
+                                <TextBlock x:Name="Message" Text="{TemplateBinding helper:PasswordBoxWaterMark.WatermarkText}" FontStyle="Italic"
+                                       Foreground="Gray" IsHitTestVisible="False" FontFamily="Calibri" Opacity="0.8" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                       Margin="6,0,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="helper:PasswordBoxWaterMark.HasText" Value="False"/>
+                                    <Condition Property="IsFocused" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterGotFocus}"/>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitGotFocus}"/>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <Trigger Property="helper:PasswordBoxWaterMark.HasText" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterHasText}"/>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitHasText}"/>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" FocusManager.FocusedElement="{Binding ElementName=textBox}" Width="632" Height="654">
@@ -42,9 +217,9 @@
             <Rectangle Fill="#FFA9B4BF" Height="1" Margin="0,282.941,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="3"/>
             <Button Content="CONTINUE" Command="{Binding ConnectCommand}" HorizontalAlignment="Left" Height="35.5" Margin="88,318.25,0,0" VerticalAlignment="Top" Width="123" Style="{DynamicResource ButtonBlue}" Foreground="#FF132F4B" Grid.Column="1" Grid.Row="3" />
             <Button Content="Need help?" Grid.Column="1" HorizontalAlignment="Center" Height="25.226" Margin="0,399.5,0,0" Grid.Row="3" VerticalAlignment="Center"  Width="98.333" Style="{DynamicResource HyperLinkButton}" FontSize="14" Foreground="#FF69D5F7" />
-            <TextBox Name="Location" Text="{Binding ConsensusServerNetworkAddress}" Grid.Column="1" HorizontalAlignment="Left" Height="45.673" Margin="0,68.167,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" FontSize="14" Foreground="#FF848484" Padding="5,12,5,0" />
-            <TextBox Name="Username" Text="{Binding ConsensusServerRpcUsername}" Grid.Column="1" HorizontalAlignment="Left" Height="45.673" Margin="0,122.84,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" FontSize="14" Foreground="#FF848484" Padding="5,12,5,0" />
-            <PasswordBox Name="TextboxConsensusServerRpcPassword" PasswordChanged="TextBoxConsensusServerRpcPassword_PasswordChanged" Grid.Column="1" HorizontalAlignment="Left" Height="45.673" Margin="0,177.167,0,0" Grid.Row="3"  VerticalAlignment="Top" Width="310" BorderBrush="Transparent" Foreground="#FF848484" Background="Transparent"  FontSize="14"  Padding="5,12,5,0" />
+            <TextBox Name="Location" Text="{Binding ConsensusServerNetworkAddress}" Grid.Column="1" HorizontalAlignment="Left" Height="45.673" Margin="0,68.167,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" FontSize="14" Foreground="Black" Padding="5,12,5,0" />
+            <TextBox Name="Username" Text="{Binding ConsensusServerRpcUsername}" Grid.Column="1" HorizontalAlignment="Left" Height="45.673" Margin="0,122.84,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" FontSize="14" Foreground="Black" Padding="5,12,5,0" />
+            <PasswordBox Tag="password" Name="TextboxConsensusServerRpcPassword" PasswordChanged="TextBoxConsensusServerRpcPassword_PasswordChanged" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Height="45.673" Margin="0,177.167,0,0" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Width="310"  Foreground="Black" FontSize="14"  Padding="5,12,5,0" />
         </Grid>
     </Grid>
 </UserControl>

@@ -57,7 +57,7 @@ namespace Paymetheus
 
         public string ConsensusServerApplicationName => ConsensusServerRpcOptions.ApplicationName;
         public string CurrencyName => BlockChain.CurrencyName;
-        public string ConsensusServerNetworkAddress { get; set; } = "localhost";
+        public string ConsensusServerNetworkAddress { get; set; } = "network address";
         public string ConsensusServerRpcUsername { get; set; } = "username";
         public string ConsensusServerRpcPassword { private get; set; } = "";
         public string ConsensusServerCertificateFile { get; set; } = ConsensusServerRpcOptions.LocalCertificateFilePath();

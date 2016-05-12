@@ -20,10 +20,9 @@ namespace Paymetheus
         public ConsensusServerConnectionOptionsView()
         {
             InitializeComponent();
-            Watermark.Set(Location, "localhost");
+            Watermark.Set(Location, "network address");
             Watermark.Set(Username, "username");
             TextboxConsensusServerRpcPassword.GotFocus += TextboxConsensusServerRpcPassword_GotFocus;
-            
         }
 
         private void TextboxConsensusServerRpcPassword_GotFocus(object sender, RoutedEventArgs e)
