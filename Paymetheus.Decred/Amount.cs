@@ -40,6 +40,18 @@ namespace Paymetheus.Decred
 
         public string Ticker { get; }
 
+        public Tuple<long, double> Split(Amount amount)
+        {
+            if (amount < 0)
+            {
+                amount = -amount;
+            }
+
+            var wholePart = amount / _atomsPerUnit;
+            var decimalPart = (double)(amount % _atomsPerUnit) / _atomsPerUnit;
+            return Tuple.Create(wholePart, decimalPart);
+        }
+
         public string FormatAmount(Amount amount)
         {
             // The negative sign has to be printed separately.  It can not be displayed as a
