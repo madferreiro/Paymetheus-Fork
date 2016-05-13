@@ -20,6 +20,8 @@ namespace Paymetheus.Helpers
         
         public void NavigateTo(Page page)
         {
+            if (_frame == null)
+                return;
             _frame.Content = page;
         }
 

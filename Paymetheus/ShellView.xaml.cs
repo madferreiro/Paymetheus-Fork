@@ -26,10 +26,13 @@ namespace Paymetheus
     /// </summary>
     public partial class ShellView : UserControl
     {
+        private Navigator _navigator;
+
+
         public ShellView()
         {
             InitializeComponent();
-            Navigator.GetInstance(ContentHolder);
+            _navigator = Navigator.GetInstance(ContentHolder);
         }
 
         private LockableToggleButton _toggledSidebarButton;
@@ -73,6 +76,42 @@ namespace Paymetheus
                     selected.PostMessage(new ShowAccountMessage(selected.Account));
                 }
             }
+        }
+
+        public void NavigateOverview(object sender, RoutedEventArgs e)
+        {
+            NavigateTo(new Overview());
+        }
+
+        public void NavigateAccounts(object sender, RoutedEventArgs e)
+        {
+            NavigateTo(new Accounts());
+        }
+
+        public void NavigateSend(object sender, RoutedEventArgs e)
+        {
+            NavigateTo(new Send());
+        }
+
+        public void NavigateRequest(object sender, RoutedEventArgs e)
+        {
+            NavigateTo(new Request());
+        }
+
+        public void NavigateHistory(object sender, RoutedEventArgs e)
+        {
+            NavigateTo(new History());
+        }
+
+        public void NavigateUnspent(object sender, RoutedEventArgs e)
+        {
+            NavigateTo(new Unspent());
+        }
+
+        public void NavigateTo(Page page)
+        {
+            if(_navigator != null)
+                _navigator.NavigateTo(page);
         }
     }
 }

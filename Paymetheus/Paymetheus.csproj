@@ -151,6 +151,9 @@
     <Compile Include="AccountHistoryView.xaml.cs">
       <DependentUpon>AccountHistoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Accounts.xaml.cs">
+      <DependentUpon>Accounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,9 @@
     <Compile Include="Helpers\Navigator.cs" />
     <Compile Include="Helpers\PasswordBoxWaterMark.cs" />
     <Compile Include="Helpers\Watermark.cs" />
+    <Compile Include="History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Overview.xaml.cs">
       <DependentUpon>Overview.xaml</DependentUpon>
     </Compile>
@@ -174,6 +180,9 @@
     </Compile>
     <Compile Include="Request.xaml.cs">
       <DependentUpon>Request.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Send.xaml.cs">
+      <DependentUpon>Send.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartupWizard.cs" />
     <Compile Include="ConnectionWizardView.xaml.cs">
@@ -249,6 +258,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateTransactionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="History.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -314,6 +331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Send.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
