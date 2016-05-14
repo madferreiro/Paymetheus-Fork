@@ -247,6 +247,9 @@
     <Compile Include="Unspent.xaml.cs">
       <DependentUpon>Unspent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AmountLabel.xaml.cs">
+      <DependentUpon>AmountLabel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\TransactionUserControl.xaml.cs">
       <DependentUpon>TransactionUserControl.xaml</DependentUpon>
     </Compile>
@@ -371,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Unspent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AmountLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
