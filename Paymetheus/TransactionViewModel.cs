@@ -7,7 +7,6 @@ using Paymetheus.Decred.Wallet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 
 namespace Paymetheus
 {
@@ -70,7 +69,6 @@ namespace Paymetheus
         public Output[] Outputs { get; }
         public Amount? Fee => _transaction.Fee;
         public DateTime LocalSeenTime => _transaction.SeenTime.LocalDateTime;
-        public string CurrencyTicker => Denomination.Decred.Ticker; // TODO: Denomination should be modifiable by user
 
         private BlockIdentity _location;
         public BlockIdentity Location
@@ -83,36 +81,7 @@ namespace Paymetheus
         public int Confirmations
         {
             get { return _confirmations; }
-            internal set
-            {
-                if (_confirmations != value)
-                {
-                    _confirmations = value;
-                    if (_confirmations < 6)
-                    {
-                        ConfirmationsVisibility = Visibility.Visible;
-                        RaisePropertyChanged();
-                    }
-                    else
-                    {
-                        ConfirmationsVisibility = Visibility.Hidden;
-                    }
-                }
-            }
-        }
-
-        private Visibility _confirmationsVisibility = Visibility.Visible; // Show confirmations for default Confirmations value of 0.
-        public Visibility ConfirmationsVisibility
-        {
-            get { return _confirmationsVisibility; }
-            private set
-            {
-                if (_confirmationsVisibility != value)
-                {
-                    _confirmationsVisibility = value;
-                    RaisePropertyChanged();
-                }
-            }
+            set { _confirmations = value; RaisePropertyChanged(); }
         }
 
         public sealed class GroupedOutput

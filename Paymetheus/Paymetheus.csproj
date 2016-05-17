@@ -179,6 +179,7 @@
     <Compile Include="OverviewDeeper.xaml.cs">
       <DependentUpon>OverviewDeeper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OverviewViewModel.cs" />
     <Compile Include="ProcessArguments.cs" />
     <Compile Include="Request.xaml.cs">
       <DependentUpon>Request.xaml</DependentUpon>
@@ -220,10 +221,6 @@
     <Compile Include="PublicPassphrasePromptView.xaml.cs">
       <DependentUpon>PublicPassphrasePromptView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RecentActivityView.xaml.cs">
-      <DependentUpon>RecentActivityView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RecentActivityViewModel.cs" />
     <Compile Include="RenameAccountDialogView.xaml.cs">
       <DependentUpon>RenameAccountDialogView.xaml</DependentUpon>
     </Compile>
@@ -232,13 +229,7 @@
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ShellViewModel.cs" />
-    <Compile Include="RecentAccountView.xaml.cs">
-      <DependentUpon>RecentAccountView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RecentAccountViewModel.cs" />
-    <Compile Include="RecentTransactionView.xaml.cs">
-      <DependentUpon>RecentTransactionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TransactionViewModel.cs" />
     <Compile Include="TransactionView.xaml.cs">
       <DependentUpon>TransactionView.xaml</DependentUpon>
@@ -323,10 +314,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RecentActivityView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="RenameAccountDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -359,14 +346,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RecentAccountView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RecentTransactionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="TransactionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

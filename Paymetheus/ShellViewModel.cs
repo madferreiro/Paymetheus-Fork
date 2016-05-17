@@ -6,7 +6,6 @@ using Paymetheus.Decred;
 using Paymetheus.Decred.Wallet;
 using Paymetheus.Rpc;
 using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -31,10 +30,8 @@ namespace Paymetheus
             }
 
             CreateAccountCommand = new DelegateCommand(CreateAccount);
-            NavigateBack = new DelegateCommand(ShowRecentActivity);
 
-            _recentActivityViewModel = new RecentActivityViewModel(this);
-            VisibleContent = _recentActivityViewModel;
+            _overviewViewModel = new OverviewViewModel(this);
 
             StartupWizard = new StartupWizard(this);
             StartupWizard.WalletOpened += StartupWizard_WalletOpened;
@@ -42,17 +39,10 @@ namespace Paymetheus
         }
 
         private Wallet _wallet;
-        private readonly RecentActivityViewModel _recentActivityViewModel;
+        private readonly OverviewViewModel _overviewViewModel;
         private AccountViewModel _accountViewModel;
 
         public string WindowTitle { get; }
-
-        private ViewModelBase _visibleContent;
-        public ViewModelBase VisibleContent
-        {
-            get { return _visibleContent; }
-            set { _visibleContent = value; RaisePropertyChanged(); }
-        }
 
         private DialogViewModelBase _visibleDialogContent;
         public DialogViewModelBase VisibleDialogContent
@@ -60,8 +50,6 @@ namespace Paymetheus
             get { return _visibleDialogContent; }
             set { _visibleDialogContent = value; RaisePropertyChanged(); }
         }
-
-        public DelegateCommand NavigateBack { get; }
 
         private bool _startupWizardVisible;
         public bool StartupWizardVisible
@@ -121,32 +109,23 @@ namespace Paymetheus
                 .Select(x => new TransactionViewModel(_wallet, x.Value, BlockIdentity.Unmined))
                 .Concat(txSet.MinedTransactions.ReverseList().SelectMany(b => b.Transactions.Select(tx => new TransactionViewModel(_wallet, tx, b.Identity))))
                 .Take(10);
-            var recentAccounts = _wallet.EnumrateAccounts()
-                .Select(a => new RecentAccountViewModel(this, a.Key, a.Value));
+            _overviewViewModel.AccountsCount = _wallet.EnumrateAccounts().Count();
             Application.Current.Dispatcher.Invoke(() =>
             {
                 foreach (var tx in recentTx)
-                    _recentActivityViewModel.RecentTransactions.Add(tx);
-                foreach (var account in recentAccounts)
-                    RecentAccounts.Add(account);
+                    _overviewViewModel.RecentTransactions.Add(tx);
             });
             SyncedBlockHeight = _wallet.ChainTip.Height;
             NotifyRecalculatedBalances();
             StartupWizardVisible = false;
-            ShowRecentActivity();
         }
 
         private void NotifyRecalculatedBalances()
         {
-            foreach (var recentAccount in RecentAccounts)
-            {
-                var currentState = _wallet.LookupAccountProperties(recentAccount.Account);
-                recentAccount.Balance = currentState.ZeroConfSpendableBalance;
-            }
-
             RaisePropertyChanged(nameof(TotalBalance));
 
             // If account visible, calculate spendable balance
+#if false
             if (_visibleContent is AccountViewModel)
             {
                 var accountViewModel = (AccountViewModel)_visibleContent;
@@ -157,39 +136,22 @@ namespace Paymetheus
                     accountViewModel.PopulateTransactionHistory();
                 });
             }
+#endif
         }
 
         private void _wallet_ChangesProcessed(object sender, Wallet.ChangesProcessedEventArgs e)
         {
             var currentHeight = e.NewChainTip?.Height ?? SyncedBlockHeight;
 
-            var movedTxViewModels = _recentActivityViewModel.RecentTransactions
+            var movedTxViewModels = _overviewViewModel.RecentTransactions
                 .Where(txvm => e.MovedTransactions.ContainsKey(txvm.TxHash))
                 .Select(txvm => Tuple.Create(txvm, e.MovedTransactions[txvm.TxHash]));
 
             var newTxViewModels = e.AddedTransactions.Select(tx => new TransactionViewModel(_wallet, tx.Item1, tx.Item2)).ToList();
 
-            foreach (var kvp in e.ModifiedAccountProperties)
-            {
-                var account = kvp.Key;
-                var state = kvp.Value;
-                var recentAccountVM = RecentAccounts.FirstOrDefault(vm => vm.Account == account);
-                if (recentAccountVM != null)
-                {
-                    recentAccountVM.AccountName = state.AccountName;
-                    recentAccountVM.Balance = state.TotalBalance;
-                }
-                else
-                {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        RecentAccounts.Add(new RecentAccountViewModel(this, account, state));
-                    });
-                }
-            }
-
             RaisePropertyChanged(nameof(TotalBalance));
 
+#if false
             if (VisibleContent is AccountViewModel)
             {
                 var accountViewModel = (AccountViewModel)VisibleContent;
@@ -199,6 +161,7 @@ namespace Paymetheus
                     accountViewModel.UpdateAccountProperties(1, accountProperties);
                 }
             }
+#endif
 
             foreach (var movedTx in movedTxViewModels)
             {
@@ -213,7 +176,7 @@ namespace Paymetheus
             {
                 foreach (var txvm in newTxViewModels)
                 {
-                    _recentActivityViewModel.RecentTransactions.Insert(0, txvm);
+                    _overviewViewModel.RecentTransactions.Insert(0, txvm);
                 }
             });
 
@@ -265,9 +228,6 @@ namespace Paymetheus
             set { _syncedBlockHeight = value; RaisePropertyChanged(); }
         }
 
-        public ObservableCollection<RecentAccountViewModel> RecentAccounts { get; } =
-            new ObservableCollection<RecentAccountViewModel>();
-
         public Amount TotalBalance => _wallet?.TotalBalance ?? 0;
 
         public ICommand CreateAccountCommand { get; }
@@ -293,12 +253,14 @@ namespace Paymetheus
                 return true;
             }
 
+#if false
             var openDialog = message as OpenDialogMessage;
             if (openDialog != null && sender == VisibleContent)
             {
                 VisibleDialogContent = openDialog.Dialog;
                 return true;
             }
+#endif
 
             var hideDialog = message as HideDialogMessage;
             if (hideDialog != null && sender == VisibleDialogContent)
@@ -310,23 +272,14 @@ namespace Paymetheus
             return false;
         }
 
-        private void ShowRecentActivity()
-        {
-            VisibleContent = _recentActivityViewModel;
-        }
-
         private void ShowTransaction(TransactionViewModel tx)
         {
-            VisibleContent = tx;
+            throw new NotImplementedException();
         }
 
         private void ShowAccount(Account account)
         {
-            // TODO: disconnect signals for previous account VM if exists.
-            var accountName = _wallet.AccountName(account);
-            _accountViewModel = new AccountViewModel(this, _wallet, account);
-
-            VisibleContent = _accountViewModel;
+            throw new NotImplementedException();
         }
     }
 }
