@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Paymetheus
 {
-    class OverviewViewModel : ViewModelBase
+    internal class OverviewViewModel : ViewModelBase
     {
         public OverviewViewModel(ShellViewModel shell) : base(shell) { }
 

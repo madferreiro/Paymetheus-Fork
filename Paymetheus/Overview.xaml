@@ -78,7 +78,6 @@
             </Setter>
         </Style>
     </Page.Resources>
-
     <Grid x:Name="LayoutRoot" Background="#FFF4F7F9">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

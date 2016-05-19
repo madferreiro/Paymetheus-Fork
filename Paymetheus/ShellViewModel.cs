@@ -39,7 +39,7 @@ namespace Paymetheus
         }
 
         private Wallet _wallet;
-        private readonly OverviewViewModel _overviewViewModel;
+        public readonly OverviewViewModel _overviewViewModel;
         private AccountViewModel _accountViewModel;
 
         public string WindowTitle { get; }

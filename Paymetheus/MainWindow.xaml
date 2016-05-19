@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paymetheus"
         mc:Ignorable="d"
+        Background="{DynamicResource ColorDarkBlueFull}" 
         Title="{Binding Path=WindowTitle, Mode=OneTime}"
         Height="600" Width="1050"
         Closed="Window_Closed">
@@ -22,7 +23,7 @@
                                     VerticalAlignment="Center"
                                     Width="700" Focusable="False"/>
         </UserControl>
-        <local:ShellView HorizontalAlignment="Stretch"
+        <local:ShellView x:Name="Shellview" HorizontalAlignment="Stretch"
                          Visibility="{Binding ElementName=mainViewModel, Path=StartupWizardVisible, Converter={StaticResource invertedVisibilityConverter}}"
                          Margin="1"/>
     </Grid>
