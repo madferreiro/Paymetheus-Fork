@@ -184,6 +184,7 @@
     <Compile Include="Request.xaml.cs">
       <DependentUpon>Request.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RequestViewModel.cs" />
     <Compile Include="Send.xaml.cs">
       <DependentUpon>Send.xaml</DependentUpon>
     </Compile>
@@ -237,8 +238,12 @@
     <Compile Include="ConsensusServerConnectionOptionsView.xaml.cs">
       <DependentUpon>ConsensusServerConnectionOptionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TypeConverters\AmountTypeConverter.cs" />
     <Compile Include="Unspent.xaml.cs">
       <DependentUpon>Unspent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AlignedAmount.xaml.cs">
+      <DependentUpon>AlignedAmount.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AmountLabel.xaml.cs">
       <DependentUpon>AmountLabel.xaml</DependentUpon>
@@ -355,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Unspent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AlignedAmount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -19,11 +20,11 @@ using System.Windows.Shapes;
 namespace Paymetheus
 {
     /// <summary>
-    /// Interaction logic for AmountLabel.xaml
+    /// Interaction logic for AlignedAmount.xaml
     /// </summary>
-    public partial class AmountLabel : UserControl
+    public partial class AlignedAmount : UserControl
     {
-        public AmountLabel()
+        public AlignedAmount()
         {
             InitializeComponent();
         }
@@ -72,78 +73,86 @@ namespace Paymetheus
         }
 
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(nameof(Value), typeof(Amount), typeof(AmountLabel), new PropertyMetadata((Amount)0, new PropertyChangedCallback(OnValueChanged)));
+            DependencyProperty.Register(nameof(Value), typeof(Amount), typeof(AlignedAmount), new PropertyMetadata((Amount)0, new PropertyChangedCallback(OnValueChanged)));
 
         public static readonly DependencyProperty DenominationProperty =
-            DependencyProperty.Register(nameof(Denomination), typeof(Denomination), typeof(AmountLabel), new PropertyMetadata(Denomination.Decred, new PropertyChangedCallback(OnDenominationChanged)));
+            DependencyProperty.Register(nameof(Denomination), typeof(Denomination), typeof(AlignedAmount), new PropertyMetadata(Denomination.Decred, new PropertyChangedCallback(OnDenominationChanged)));
 
         public static readonly DependencyProperty FontSizeWholeProperty =
-            DependencyProperty.Register(nameof(FontSizeWhole), typeof(double), typeof(AmountLabel), new PropertyMetadata((double)12, new PropertyChangedCallback(OnFontSizeWholeChanged)));
+            DependencyProperty.Register(nameof(FontSizeWhole), typeof(double), typeof(AlignedAmount), new PropertyMetadata((double)12, new PropertyChangedCallback(OnFontSizeWholeChanged)));
 
         public static readonly DependencyProperty FontSizeDecimalProperty =
-            DependencyProperty.Register(nameof(FontSizeDecimal), typeof(double), typeof(AmountLabel), new PropertyMetadata((double)12, new PropertyChangedCallback(OnFontSizeDecimalChanged)));
+            DependencyProperty.Register(nameof(FontSizeDecimal), typeof(double), typeof(AlignedAmount), new PropertyMetadata((double)12, new PropertyChangedCallback(OnFontSizeDecimalChanged)));
 
         public static readonly DependencyProperty ForegroundWholeProperty =
-            DependencyProperty.Register(nameof(ForegroundWhole), typeof(Brush), typeof(AmountLabel), new PropertyMetadata(Brushes.Black, new PropertyChangedCallback(OnForegroundWholeChanged)));
+            DependencyProperty.Register(nameof(ForegroundWhole), typeof(Brush), typeof(AlignedAmount), new PropertyMetadata(Brushes.Black, new PropertyChangedCallback(OnForegroundWholeChanged)));
 
         public static readonly DependencyProperty ForegroundDecimalProperty =
-            DependencyProperty.Register(nameof(ForegroundDecimal), typeof(Brush), typeof(AmountLabel), new PropertyMetadata(Brushes.Black, new PropertyChangedCallback(OnForegroundDecimalChanged)));
+            DependencyProperty.Register(nameof(ForegroundDecimal), typeof(Brush), typeof(AlignedAmount), new PropertyMetadata(Brushes.Black, new PropertyChangedCallback(OnForegroundDecimalChanged)));
 
         public static readonly DependencyProperty FontWeightWholeProperty =
-            DependencyProperty.Register(nameof(FontWeightWhole), typeof(FontWeight), typeof(AmountLabel), new PropertyMetadata(FontWeights.Normal, new PropertyChangedCallback(OnFontWeightWholeChanged)));
+            DependencyProperty.Register(nameof(FontWeightWhole), typeof(FontWeight), typeof(AlignedAmount), new PropertyMetadata(FontWeights.Normal, new PropertyChangedCallback(OnFontWeightWholeChanged)));
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (AmountLabel)d;
-            var value = (Amount)e.NewValue;
-
-            var splitValue = control.Denomination.Split(value);
-            var negativeSign = value < 0 ? "-" : "";
-
-            control.WholePartRun.Text = string.Format("{0}{1:#,0}", negativeSign, splitValue.Item1);
-            control.DecimalPartRun.Text = string.Format("{0:.0}", splitValue.Item2);
+            var control = (AlignedAmount)d;
+            control.Render();
         }
 
         private static void OnDenominationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (AmountLabel)d;
-            var denomination = (Denomination)e.NewValue;
-            control.TickerRun.Text = " " + denomination.Ticker;
+            var control = (AlignedAmount)d;
+            control.Render();
+        }
+
+        private void Render()
+        {
+            var value = Value;
+            var denomination = Denomination;
+
+            var splitValue = denomination.Split(value);
+            var sign = value < 0 ? "-" : "+";
+
+            var whole = string.Format("{0}{1:#,0}", sign, splitValue.Item1);
+            var @decimal = string.Format("{0:.0#######}", splitValue.Item2);
+
+            WholePartRun.Text = whole;
+            DecimalPartRun.Text = @decimal;
+            TrailingZerosRun.Text = new string('0', denomination.DecimalPoints + 1 - @decimal.Length);
         }
 
         private static void OnFontSizeWholeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (AmountLabel)d;
+            var control = (AlignedAmount)d;
             var fontSize = (double)e.NewValue;
             control.WholePartRun.FontSize = fontSize;
         }
 
         private static void OnFontSizeDecimalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (AmountLabel)d;
+            var control = (AlignedAmount)d;
             var fontSize = (double)e.NewValue;
             control.DecimalPartRun.FontSize = fontSize;
-            control.TickerRun.FontSize = fontSize;
+            control.TrailingZerosRun.FontSize = fontSize;
         }
 
         private static void OnForegroundWholeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (AmountLabel)d;
+            var control = (AlignedAmount)d;
             var brush = (Brush)e.NewValue;
-            control.TickerRun.Foreground = brush;
             control.WholePartRun.Foreground = brush;
         }
 
         private static void OnForegroundDecimalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (AmountLabel)d;
+            var control = (AlignedAmount)d;
             var brush = (Brush)e.NewValue;
             control.DecimalPartRun.Foreground = brush;
         }
 
         private static void OnFontWeightWholeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (AmountLabel)d;
+            var control = (AlignedAmount)d;
             control.WholePartRun.FontWeight = (FontWeight)e.NewValue;
         }
     }

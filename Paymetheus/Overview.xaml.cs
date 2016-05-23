@@ -26,7 +26,5 @@ namespace Paymetheus
             var selectedItem = (RecentActivity)lstRecentActivity.SelectedItem;
             Navigator.GetInstance().NavigateTo(new OverviewDeeper(selectedItem));
         }
-        
-        
     }
 }
