@@ -2,18 +2,13 @@
 // Copyright (c) 2016 The Decred developers
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Paymetheus
+namespace Paymetheus.Framework
 {
-    class DialogViewModelBase : ViewModelBase
+    public class DialogViewModelBase : ViewModelBase
     {
-        public DialogViewModelBase(ShellViewModel shell) : base(shell)
+        public DialogViewModelBase(ShellViewModelBase shell) : base(shell)
         {
             HideDialogCommand = new DelegateCommand(HideDialog);
         }

@@ -1,4 +1,7 @@
-﻿using Paymetheus.Decred;
+﻿// Copyright (c) 2016 The Decred developers
+// Licensed under the ISC license.  See LICENSE file in the project root for full license information.
+
+using Paymetheus.Decred;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Paymetheus.TypeConverters
+namespace Paymetheus.Framework.TypeConverters
 {
     class AmountTypeConverter : TypeConverter
     {

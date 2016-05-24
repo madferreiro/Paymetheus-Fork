@@ -2,17 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Paymetheus"
+             xmlns:viewmodels="clr-namespace:Paymetheus.ViewModels"
+             xmlns:vc="clr-namespace:Paymetheus.Framework.ValueConverters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:w="clr-namespace:Paymetheus.Decred.Wallet;assembly=Paymetheus.Bitcoin"
+             xmlns:w="clr-namespace:Paymetheus.Decred.Wallet;assembly=Paymetheus.Decred"
              xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d" 
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <local:BooleanToVisibilityConverter x:Key="visibilityConverter" />
-        <local:BooleanToVisibilityConverter x:Key="invertedVisibilityConverter" True="Collapsed" False="Visible" />
-        <local:BooleanToVisibilityConverter x:Key="hiddenConverter" False="Hidden" />
-        <local:AmountConverter x:Key="amountConverter" />
+        <vc:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+        <vc:BooleanToVisibilityConverter x:Key="invertedVisibilityConverter" True="Collapsed" False="Visible" />
+        <vc:BooleanToVisibilityConverter x:Key="hiddenConverter" False="Hidden" />
         
         <DataTemplate x:Key="buttonTemplate">
             <Button Content="{Binding ButtonLabel}" Command="{Binding}" Margin="6 2" Padding="10 2"/>

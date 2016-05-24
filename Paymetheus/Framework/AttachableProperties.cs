@@ -5,13 +5,13 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace Paymetheus
+namespace Paymetheus.Framework
 {
-    static class BindingProperties
+    public static class AttachableProperties
     {
         public static readonly DependencyProperty UpdateSourceOnEnterProperty =
             DependencyProperty.RegisterAttached(nameof(UpdateSourceOnEnter), typeof(DependencyProperty),
-                typeof(BindingProperties), new PropertyMetadata(null, UpdateSourceOnEnter));
+                typeof(AttachableProperties), new PropertyMetadata(null, UpdateSourceOnEnter));
 
         public static DependencyProperty GetUpdateSourceOnEnterProperty(DependencyObject instance)
         {

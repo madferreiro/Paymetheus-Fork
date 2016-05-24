@@ -5,7 +5,7 @@
 using System;
 using System.Windows.Input;
 
-namespace Paymetheus
+namespace Paymetheus.Framework
 {
     class DelegateCommandBase
     {

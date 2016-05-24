@@ -157,9 +157,10 @@
     <Compile Include="AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AccountViewModel.cs" />
+    <Compile Include="Framework\ShellViewModelBase.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="AssemblyResources.cs" />
-    <Compile Include="BindingProperties.cs" />
+    <Compile Include="Framework\AttachableProperties.cs" />
     <Compile Include="ConfirmSeedView.xaml.cs">
       <DependentUpon>ConfirmSeedView.xaml</DependentUpon>
     </Compile>
@@ -167,7 +168,7 @@
       <DependentUpon>CreateOrImportSeedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="DTO\RecentActivity.cs" />
-    <Compile Include="Helpers\Navigator.cs" />
+    <Compile Include="Framework\Navigator.cs" />
     <Compile Include="Helpers\PasswordBoxWaterMark.cs" />
     <Compile Include="Helpers\Watermark.cs" />
     <Compile Include="History.xaml.cs">
@@ -179,12 +180,12 @@
     <Compile Include="OverviewDeeper.xaml.cs">
       <DependentUpon>OverviewDeeper.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OverviewViewModel.cs" />
+    <Compile Include="ViewModels\OverviewViewModel.cs" />
     <Compile Include="ProcessArguments.cs" />
     <Compile Include="Request.xaml.cs">
       <DependentUpon>Request.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RequestViewModel.cs" />
+    <Compile Include="ViewModels\RequestViewModel.cs" />
     <Compile Include="Send.xaml.cs">
       <DependentUpon>Send.xaml</DependentUpon>
     </Compile>
@@ -195,26 +196,25 @@
     <Compile Include="CreateAccountDialogView.xaml.cs">
       <DependentUpon>CreateAccountDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateAccountDialogViewModel.cs" />
-    <Compile Include="DelegateCommand.cs" />
-    <Compile Include="AmountConverter.cs" />
-    <Compile Include="BooleanConverter.cs" />
-    <Compile Include="ButtonCommand.cs" />
+    <Compile Include="ViewModels\CreateAccountDialogViewModel.cs" />
+    <Compile Include="Framework\DelegateCommand.cs" />
+    <Compile Include="Framework\ValueConverters\BooleanConverter.cs" />
+    <Compile Include="Framework\ButtonCommand.cs" />
     <Compile Include="ConfirmationIndicator.xaml.cs">
       <DependentUpon>ConfirmationIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateTransactionView.xaml.cs">
       <DependentUpon>CreateTransactionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DialogViewModelBase.cs" />
+    <Compile Include="Framework\DialogViewModelBase.cs" />
     <Compile Include="ImportDialogView.xaml.cs">
       <DependentUpon>ImportDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImportDialogViewModel.cs" />
+    <Compile Include="ViewModels\ImportDialogViewModel.cs" />
     <Compile Include="PassphraseDialogView.xaml.cs">
       <DependentUpon>PassphraseDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PassphraseDialogViewModel.cs" />
+    <Compile Include="ViewModels\PassphraseDialogViewModel.cs" />
     <Compile Include="PromptPassphrasesView.xaml.cs">
       <DependentUpon>PromptPassphrasesView.xaml</DependentUpon>
     </Compile>
@@ -224,20 +224,20 @@
     <Compile Include="RenameAccountDialogView.xaml.cs">
       <DependentUpon>RenameAccountDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RenameAccountDialogViewModel.cs" />
+    <Compile Include="ViewModels\RenameAccountDialogViewModel.cs" />
     <Compile Include="ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShellViewModel.cs" />
-    <Compile Include="RecentAccountViewModel.cs" />
-    <Compile Include="TransactionViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\RecentAccountViewModel.cs" />
+    <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="TransactionView.xaml.cs">
       <DependentUpon>TransactionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConsensusServerConnectionOptionsView.xaml.cs">
       <DependentUpon>ConsensusServerConnectionOptionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TypeConverters\AmountTypeConverter.cs" />
+    <Compile Include="Framework\TypeConverters\AmountTypeConverter.cs" />
     <Compile Include="Unspent.xaml.cs">
       <DependentUpon>Unspent.xaml</DependentUpon>
     </Compile>
@@ -250,10 +250,10 @@
     <Compile Include="UserControls\TransactionUserControl.xaml.cs">
       <DependentUpon>TransactionUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModelBase.cs" />
-    <Compile Include="ViewModelMessage.cs" />
-    <Compile Include="WizardDialogViewModelBase.cs" />
-    <Compile Include="WizardViewModel.cs" />
+    <Compile Include="Framework\ViewModelBase.cs" />
+    <Compile Include="Framework\ViewModelMessage.cs" />
+    <Compile Include="Framework\WizardDialogViewModelBase.cs" />
+    <Compile Include="Framework\WizardViewModel.cs" />
     <Page Include="AccountHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

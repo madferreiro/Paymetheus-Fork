@@ -6,9 +6,9 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Paymetheus
+namespace Paymetheus.Framework
 {
-    class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public ViewModelBase(ViewModelBase parent = null)
         {

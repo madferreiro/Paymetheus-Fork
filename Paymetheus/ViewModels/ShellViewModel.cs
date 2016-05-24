@@ -4,15 +4,16 @@
 
 using Paymetheus.Decred;
 using Paymetheus.Decred.Wallet;
+using Paymetheus.Framework;
 using Paymetheus.Rpc;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Paymetheus
+namespace Paymetheus.ViewModels
 {
-    sealed class ShellViewModel : ViewModelBase
+    sealed class ShellViewModel : ShellViewModelBase
     {
         public ShellViewModel()
         {
@@ -239,20 +240,6 @@ namespace Paymetheus
 
         protected override bool OnRoutedMessage(ViewModelBase sender, ViewModelMessageBase message)
         {
-            var showTx = message as ShowTransactionMessage;
-            if (showTx != null)
-            {
-                ShowTransaction(showTx.Transaction);
-                return true;
-            }
-
-            var showAccount = message as ShowAccountMessage;
-            if (showAccount != null)
-            {
-                ShowAccount(showAccount.Account);
-                return true;
-            }
-
 #if false
             var openDialog = message as OpenDialogMessage;
             if (openDialog != null && sender == VisibleContent)

@@ -3,10 +3,11 @@
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
 using Paymetheus.Decred.Wallet;
+using Paymetheus.Framework;
 using System;
 using System.Windows.Input;
 
-namespace Paymetheus
+namespace Paymetheus.ViewModels
 {
     sealed class RenameAccountDialogViewModel : DialogViewModelBase
     {

@@ -4,9 +4,10 @@
 
 using Paymetheus.Decred;
 using Paymetheus.Decred.Wallet;
+using Paymetheus.Framework;
 using System;
 
-namespace Paymetheus
+namespace Paymetheus.ViewModels
 {
     sealed class RecentAccountViewModel : ViewModelBase
     {

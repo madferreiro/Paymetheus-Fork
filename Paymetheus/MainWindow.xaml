@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paymetheus"
+        xmlns:viewmodels="clr-namespace:Paymetheus.ViewModels"
         mc:Ignorable="d"
         Background="{DynamicResource ColorDarkBlueFull}" 
         Title="{Binding Path=WindowTitle, Mode=OneTime}"
@@ -15,7 +16,7 @@
         </Style>
     </Window.Resources>
     <Window.DataContext>
-        <local:ShellViewModel x:Name="mainViewModel"/>
+        <viewmodels:ShellViewModel x:Name="mainViewModel"/>
     </Window.DataContext>
     <Grid>
         <UserControl Visibility="{Binding StartupWizardVisible, Converter={StaticResource visibilityConverter}}" Focusable="False">

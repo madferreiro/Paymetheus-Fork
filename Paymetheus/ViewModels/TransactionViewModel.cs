@@ -4,11 +4,12 @@
 
 using Paymetheus.Decred;
 using Paymetheus.Decred.Wallet;
+using Paymetheus.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Paymetheus
+namespace Paymetheus.ViewModels
 {
     sealed class TransactionViewModel : ViewModelBase
     {

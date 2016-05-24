@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Paymetheus
+namespace Paymetheus.Framework
 {
     sealed class ButtonCommand : DelegateCommand, INotifyPropertyChanged
     {

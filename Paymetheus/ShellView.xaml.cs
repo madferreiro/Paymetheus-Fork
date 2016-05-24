@@ -2,7 +2,7 @@
 // Copyright (c) 2016 The Decred developers
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
-using Paymetheus.Helpers;
+using Paymetheus.Framework;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,7 +16,6 @@ namespace Paymetheus
         private Navigator _navigator;
         private Overview _overview;
         private Request _request;
-        internal ShellViewModel Shell;
 
         public ShellView()
         {
@@ -26,10 +25,10 @@ namespace Paymetheus
 
         public void NavigateOverview(object sender, RoutedEventArgs e)
         {
-            if (_overview == null && Shell != null)
+            if (_overview == null)
             {
                 _overview = new Overview();
-                _overview.DataContext = Shell._overviewViewModel;
+                //_overview.DataContext = Shell._overviewViewModel;
             }
             NavigateTo(_overview);
         }
@@ -49,7 +48,7 @@ namespace Paymetheus
             if (_request == null)
             {
                 _request = new Request();
-                _request.DataContext = new RequestViewModel(Shell);
+                //_request.DataContext = new RequestViewModel(Shell);
             }
             NavigateTo(_request);
         }

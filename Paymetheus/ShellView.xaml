@@ -4,21 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paymetheus"
+             xmlns:viewmodels="clr-namespace:Paymetheus.ViewModels"
              mc:Ignorable="d" 
              
 	Background="{DynamicResource ColorDarkBlueFull}" 
              d:DesignHeight="550" d:DesignWidth="900">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type local:CreateAccountDialogViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:CreateAccountDialogViewModel}">
             <local:CreateAccountDialogView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:RenameAccountDialogViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:RenameAccountDialogViewModel}">
             <local:RenameAccountDialogView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ImportDialogViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:ImportDialogViewModel}">
             <local:ImportDialogView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:PassphraseDialogViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:PassphraseDialogViewModel}">
             <local:PassphraseDialogView/>
         </DataTemplate>
         <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>

@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Paymetheus
+namespace Paymetheus.Framework.ValueConverters
 {
     public class BooleanConverter<T> : IValueConverter
     {

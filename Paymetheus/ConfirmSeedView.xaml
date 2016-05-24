@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Paymetheus"
+             xmlns:f="clr-namespace:Paymetheus.Framework"
              mc:Ignorable="d"
 	         Background="{DynamicResource ColorDarkBlueFull}" 
              d:DesignWidth="842" d:DesignHeight="718"
@@ -32,7 +33,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Rectangle Visibility="{Binding UsePublicEncryption, Converter={StaticResource hiddenConverter}}" Width="610" Fill="#FFF4F4F5" Margin="0,0,0,0" RadiusY="5" RadiusX="5" Height="25" VerticalAlignment="Center" />
-                    <TextBox x:Name="textBox" BorderThickness="0" Height="20" Width="600" Margin="3" Text="{Binding Input, Mode=OneWayToSource}" local:BindingProperties.UpdateSourceOnEnterProperty="TextBox.Text" VerticalAlignment="Center" />
+                    <TextBox x:Name="textBox" BorderThickness="0" Height="20" Width="600" Margin="3" Text="{Binding Input, Mode=OneWayToSource}" f:AttachableProperties.UpdateSourceOnEnterProperty="TextBox.Text" VerticalAlignment="Center" />
                 </Grid>
             </DockPanel>
         </StackPanel>

@@ -2,11 +2,11 @@
 // Copyright (c) 2016 The Decred developers
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
-namespace Paymetheus
+namespace Paymetheus.Framework
 {
     class WizardViewModelBase : ViewModelBase
     {
-        public WizardViewModelBase(ShellViewModel shell) : base(shell) { }
+        public WizardViewModelBase(ShellViewModelBase shell) : base(shell) { }
 
         private WizardDialogViewModelBase _currentDialog;
         public WizardDialogViewModelBase CurrentDialog

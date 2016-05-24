@@ -1,5 +1,5 @@
 ﻿using Paymetheus.Decred;
-using Paymetheus.TypeConverters;
+using Paymetheus.Framework.TypeConverters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -5,6 +5,7 @@
 using Paymetheus.Decred;
 using Paymetheus.Decred.Util;
 using Paymetheus.Decred.Wallet;
+using Paymetheus.Framework;
 using Paymetheus.Rpc;
 using System;
 using System.IO;
@@ -14,13 +15,13 @@ namespace Paymetheus
 {
     sealed class StartupWizard : WizardViewModelBase
     {
-        public StartupWizard(ShellViewModel shell) : base(shell)
+        public StartupWizard(ShellViewModelBase shell) : base(shell)
         {
             CurrentDialog = new ConsensusServerRpcConnectionDialog(this);
             Shell = shell;
         }
 
-        public ShellViewModel Shell { get; }
+        public ShellViewModelBase Shell { get; }
 
         public event EventHandler WalletOpened;
 

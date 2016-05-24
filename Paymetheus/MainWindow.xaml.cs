@@ -2,7 +2,6 @@
 // Copyright (c) 2016 The Decred developers
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
-using Paymetheus.Decred;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,7 +15,6 @@ namespace Paymetheus
         public MainWindow()
         {
             InitializeComponent();
-            Shellview.Shell = mainViewModel;
         }
 
         private void Window_Closed(object sender, System.EventArgs e)

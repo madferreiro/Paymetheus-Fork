@@ -1,5 +1,5 @@
 ﻿using Paymetheus.DTO;
-using Paymetheus.Helpers;
+using Paymetheus.Framework;
 using System;
 using System.Collections.Generic;
 
@@ -7,8 +7,6 @@ namespace Paymetheus
 {
     public partial class Overview
     {
-        private OverviewViewModel _overviewViewModel { get; set; }
-
         public Overview()
         {
             InitializeComponent();

@@ -3,7 +3,7 @@
 
 using System.Windows.Controls;
 
-namespace Paymetheus.Helpers
+namespace Paymetheus.Framework
 {
     public class Navigator
     {
