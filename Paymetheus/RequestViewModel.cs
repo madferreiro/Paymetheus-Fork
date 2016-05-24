@@ -1,10 +1,9 @@
-﻿using Paymetheus.Decred;
-using Paymetheus.Rpc;
+﻿// Copyright (c) 2016 The Decred developers
+// Licensed under the ISC license.  See LICENSE file in the project root for full license information.
+
+using Paymetheus.Decred.Wallet;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -28,7 +27,6 @@ namespace Paymetheus
             set { _generatedAddress = value; RaisePropertyChanged(); }
         }
 
-
         private DelegateCommand _generateAddressCommand;
         public ICommand GenerateAddressCommand => _generateAddressCommand;
 
@@ -37,7 +35,7 @@ namespace Paymetheus
             try
             {
                 _generateAddressCommand.Executable = false;
-                var account = new Decred.Wallet.Account(0); // TODO: use selected account
+                var account = new Account(0); // TODO: use selected account
                 var address = await App.Current.WalletRpcClient.NextExternalAddressAsync(account);
                 GeneratedAddress = address;
             }

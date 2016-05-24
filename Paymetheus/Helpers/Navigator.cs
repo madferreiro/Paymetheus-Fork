@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿// Copyright (c) 2016 The Decred developers
+// Licensed under the ISC license.  See LICENSE file in the project root for full license information.
+
+using System.Windows.Controls;
 
 namespace Paymetheus.Helpers
 {
@@ -20,10 +23,7 @@ namespace Paymetheus.Helpers
         
         public void NavigateTo(Page page)
         {
-            if (_frame == null)
-                return;
             _frame.Content = page;
         }
-
     }
 }

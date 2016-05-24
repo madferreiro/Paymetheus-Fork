@@ -3,7 +3,6 @@
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
 using Paymetheus.Helpers;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,53 +24,13 @@ namespace Paymetheus
             _navigator = Navigator.GetInstance(ContentHolder);
         }
 
-        private LockableToggleButton _toggledSidebarButton;
-
-        private bool ReplaceCheckedSidebarButton(RoutedEventArgs e, LockableToggleButton replacement)
-        {
-            if (_toggledSidebarButton != replacement)
-            {
-                if (_toggledSidebarButton != null)
-                {
-                    _toggledSidebarButton.Locked = false;
-                    _toggledSidebarButton.IsChecked = false;
-                }
-                _toggledSidebarButton = replacement;
-                _toggledSidebarButton.Locked = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void RecentActivityToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            var button = (LockableToggleButton)e.Source;
-            if (ReplaceCheckedSidebarButton(e, button))
-            {
-                Console.WriteLine("todo");
-            }
-        }
-
-        private void AccountToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            var button = (LockableToggleButton)e.Source;
-            if (ReplaceCheckedSidebarButton(e, button))
-            {
-                var selected = (RecentAccountViewModel)button.DataContext;
-                if (selected != null)
-                {
-                    selected.PostMessage(new ShowAccountMessage(selected.Account));
-                }
-            }
-        }
-
         public void NavigateOverview(object sender, RoutedEventArgs e)
         {
             if (_overview == null && Shell != null)
-                _overview = new Overview(Shell._overviewViewModel);
+            {
+                _overview = new Overview();
+                _overview.DataContext = Shell._overviewViewModel;
+            }
             NavigateTo(_overview);
         }
 

@@ -211,7 +211,6 @@
       <DependentUpon>ImportDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImportDialogViewModel.cs" />
-    <Compile Include="LockableToggleButton.cs" />
     <Compile Include="PassphraseDialogView.xaml.cs">
       <DependentUpon>PassphraseDialogView.xaml</DependentUpon>
     </Compile>
