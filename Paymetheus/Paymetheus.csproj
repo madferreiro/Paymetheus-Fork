@@ -158,6 +158,7 @@
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Framework\ShellViewModelBase.cs" />
+    <Compile Include="Framework\SingletonViewModelLocator.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="AssemblyResources.cs" />
     <Compile Include="Framework\AttachableProperties.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Framework\ViewModelMessage.cs" />
     <Compile Include="Framework\WizardDialogViewModelBase.cs" />
     <Compile Include="Framework\WizardViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Page Include="AccountHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

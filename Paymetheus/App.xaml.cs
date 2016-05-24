@@ -3,7 +3,9 @@
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
 using Paymetheus.Decred;
+using Paymetheus.Framework;
 using Paymetheus.Rpc;
+using Paymetheus.ViewModels;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -23,6 +25,10 @@ namespace Paymetheus
         {
             if (Current != null)
                 throw new ApplicationException("Application instance already exists");
+
+            InitializeComponent();
+
+            SingletonViewModelLocator.RegisterFactory<ShellView, ShellViewModel>();
 
             Application.Current.Dispatcher.UnhandledException += (sender, args) =>
             {

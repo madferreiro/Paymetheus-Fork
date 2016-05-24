@@ -9,15 +9,13 @@
         Background="{DynamicResource ColorDarkBlueFull}" 
         Title="{Binding Path=WindowTitle, Mode=OneTime}"
         Height="600" Width="1050"
-        Closed="Window_Closed">
+        Closed="Window_Closed"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ShellViewModel}">
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
     </Window.Resources>
-    <Window.DataContext>
-        <viewmodels:ShellViewModel x:Name="mainViewModel"/>
-    </Window.DataContext>
     <Grid>
         <UserControl Visibility="{Binding StartupWizardVisible, Converter={StaticResource visibilityConverter}}" Focusable="False">
             <local:ConnectionWizardView DataContext="{Binding StartupWizard}"
@@ -25,7 +23,7 @@
                                     Width="700" Focusable="False"/>
         </UserControl>
         <local:ShellView x:Name="Shellview" HorizontalAlignment="Stretch"
-                         Visibility="{Binding ElementName=mainViewModel, Path=StartupWizardVisible, Converter={StaticResource invertedVisibilityConverter}}"
+                         Visibility="{Binding Path=StartupWizardVisible, Converter={StaticResource invertedVisibilityConverter}}"
                          Margin="1"/>
     </Grid>
 </Window>
