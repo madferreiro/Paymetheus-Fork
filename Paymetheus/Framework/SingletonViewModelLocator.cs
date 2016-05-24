@@ -9,12 +9,12 @@ namespace Paymetheus.Framework
 {
     public static class SingletonViewModelLocator
     {
-        static Dictionary<Type, Func<ViewModelBase>> Factories = new Dictionary<Type, Func<ViewModelBase>>();
-        static Dictionary<Type, ViewModelBase> ViewModels = new Dictionary<Type, ViewModelBase>();
+        static Dictionary<string, Func<ViewModelBase>> Factories = new Dictionary<string, Func<ViewModelBase>>();
+        static Dictionary<string, ViewModelBase> ViewModels = new Dictionary<string, ViewModelBase>();
 
         public static void RegisterFactory<TView>(Func<ViewModelBase> factory)
         {
-            Factories[typeof(TView)] = factory;
+            Factories[typeof(TView).Name] = factory;
         }
 
         public static void RegisterFactory<TView, TViewModel>()
@@ -27,22 +27,20 @@ namespace Paymetheus.Framework
         public static void RegisterInstance<TView>(ViewModelBase viewModel)
             where TView : FrameworkElement
         {
-            ViewModels[typeof(TView)] = viewModel;
+            ViewModels[typeof(TView).Name] = viewModel;
         }
 
-        public static ViewModelBase Resolve<TView>()
+        public static ViewModelBase Resolve(string viewTypeName)
         {
-            var viewType = typeof(TView);
-
-            if (ViewModels.ContainsKey(viewType))
+            if (ViewModels.ContainsKey(viewTypeName))
             {
-                return ViewModels[viewType];
+                return ViewModels[viewTypeName];
             }
 
-            if (Factories.ContainsKey(viewType))
+            if (Factories.ContainsKey(viewTypeName))
             {
-                var instance = Factories[viewType]();
-                ViewModels[viewType] = instance;
+                var instance = Factories[viewTypeName]();
+                ViewModels[viewTypeName] = instance;
                 return instance;
             }
 

@@ -7,6 +7,6 @@ namespace Paymetheus.ViewModels
 {
     public class ViewModelLocator
     {
-        public object ShellViewModel => SingletonViewModelLocator.Resolve<ShellView>();
+        public object ShellViewModel => SingletonViewModelLocator.Resolve("ShellView");
     }
 }
