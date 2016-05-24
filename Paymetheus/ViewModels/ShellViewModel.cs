@@ -33,6 +33,7 @@ namespace Paymetheus.ViewModels
             CreateAccountCommand = new DelegateCommand(CreateAccount);
 
             _overviewViewModel = new OverviewViewModel(this);
+            SingletonViewModelLocator.RegisterInstance<Overview>(_overviewViewModel);
 
             StartupWizard = new StartupWizard(this);
             StartupWizard.WalletOpened += StartupWizard_WalletOpened;

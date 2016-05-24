@@ -101,7 +101,7 @@ namespace Paymetheus
             var negativeSign = value < 0 ? "-" : "";
 
             control.WholePartRun.Text = string.Format("{0}{1:#,0}", negativeSign, splitValue.Item1);
-            control.DecimalPartRun.Text = string.Format("{0:.0}", splitValue.Item2);
+            control.DecimalPartRun.Text = string.Format("{0:.0#######}", splitValue.Item2);
         }
 
         private static void OnDenominationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
