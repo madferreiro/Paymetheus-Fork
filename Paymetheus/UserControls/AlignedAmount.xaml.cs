@@ -30,10 +30,10 @@ namespace Paymetheus
         }
 
         [TypeConverter(typeof(AmountTypeConverter))]
-        public Amount Value
+        public Amount Amount
         {
-            get { return (Amount)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get { return (Amount)GetValue(AmountProperty); }
+            set { SetValue(AmountProperty, value); }
         }
 
         public Denomination Denomination
@@ -72,8 +72,8 @@ namespace Paymetheus
             set { SetValue(FontWeightWholeProperty, value); }
         }
 
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(nameof(Value), typeof(Amount), typeof(AlignedAmount), new PropertyMetadata((Amount)0, new PropertyChangedCallback(OnValueChanged)));
+        public static readonly DependencyProperty AmountProperty =
+            DependencyProperty.Register(nameof(Amount), typeof(Amount), typeof(AlignedAmount), new PropertyMetadata((Amount)0, new PropertyChangedCallback(OnValueChanged)));
 
         public static readonly DependencyProperty DenominationProperty =
             DependencyProperty.Register(nameof(Denomination), typeof(Denomination), typeof(AlignedAmount), new PropertyMetadata(Denomination.Decred, new PropertyChangedCallback(OnDenominationChanged)));
@@ -107,7 +107,7 @@ namespace Paymetheus
 
         private void Render()
         {
-            var value = Value;
+            var value = Amount;
             var denomination = Denomination;
 
             var splitValue = denomination.Split(value);

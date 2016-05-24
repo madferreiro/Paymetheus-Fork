@@ -16,6 +16,7 @@ namespace Paymetheus
     {
         private Navigator _navigator;
         private Overview _overview;
+        private Request _request;
         internal ShellViewModel Shell;
 
         public ShellView()
@@ -86,7 +87,12 @@ namespace Paymetheus
 
         public void NavigateRequest(object sender, RoutedEventArgs e)
         {
-            NavigateTo(new Request());
+            if (_request == null)
+            {
+                _request = new Request();
+                _request.DataContext = new RequestViewModel(Shell);
+            }
+            NavigateTo(_request);
         }
 
         public void NavigateHistory(object sender, RoutedEventArgs e)

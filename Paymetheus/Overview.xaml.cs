@@ -15,10 +15,9 @@ namespace Paymetheus
             lstRecentActivity.MouseDoubleClick += TxSelected;
         }
 
-        internal Overview(OverviewViewModel overviewViewModel) : this()
+        internal Overview(object dataContext) : this()
         {
-            _overviewViewModel = overviewViewModel;
-            lstRecentActivity.ItemsSource = _overviewViewModel.RecentTransactions;
+            DataContext = dataContext;
         }
 
         private void TxSelected(object sender, System.Windows.Input.MouseButtonEventArgs e)

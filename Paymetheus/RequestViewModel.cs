@@ -37,13 +37,13 @@ namespace Paymetheus
             try
             {
                 _generateAddressCommand.Executable = false;
-                var account = new Decred.Wallet.Account(0); throw new NotImplementedException();
+                var account = new Decred.Wallet.Account(0); // TODO: use selected account
                 var address = await App.Current.WalletRpcClient.NextExternalAddressAsync(account);
                 GeneratedAddress = address;
             }
             catch (Exception ex)
             {
-                // TODO: 
+                // TODO: stop using messagebox for error reporting
                 MessageBox.Show($"Error occurred when requesting address:\n\n{ex}", "Error");
             }
             finally
