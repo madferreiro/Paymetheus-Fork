@@ -154,9 +154,6 @@
     <Compile Include="Accounts.xaml.cs">
       <DependentUpon>Accounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AccountView.xaml.cs">
-      <DependentUpon>AccountView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Framework\ShellViewModelBase.cs" />
     <Compile Include="Framework\SingletonViewModelLocator.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
@@ -203,9 +200,6 @@
     <Compile Include="Framework\ButtonCommand.cs" />
     <Compile Include="ConfirmationIndicator.xaml.cs">
       <DependentUpon>ConfirmationIndicator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CreateTransactionView.xaml.cs">
-      <DependentUpon>CreateTransactionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Framework\DialogViewModelBase.cs" />
     <Compile Include="ImportDialogView.xaml.cs">
@@ -264,10 +258,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AccountView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ConfirmationIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,10 +275,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateOrImportSeedView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CreateTransactionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -141,7 +141,7 @@ namespace Paymetheus.ViewModels
         {
             // TODO: The OverviewViewModel should probably connect to this event.  This could be
             // done after the wallet is synced.
-            var overviewViewModel = ViewModelLocator.OverviewViewModel;
+            var overviewViewModel = ViewModelLocator.OverviewViewModel as OverviewViewModel;
             if (overviewViewModel != null)
             {
                 var currentHeight = e.NewChainTip?.Height ?? SyncedBlockHeight;
