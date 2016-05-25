@@ -12,8 +12,7 @@ namespace Paymetheus.ViewModels
 {
     sealed class PassphraseDialogViewModel : DialogViewModelBase
     {
-        public PassphraseDialogViewModel(ShellViewModel shell, string header, string buttonText, Func<string, Task> executeWithPassphrase)
-            : base(shell)
+        public PassphraseDialogViewModel(string header, string buttonText, Func<string, Task> executeWithPassphrase) : base()
         {
             Header = header;
             ExecuteText = buttonText;

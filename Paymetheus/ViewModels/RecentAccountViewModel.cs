@@ -11,11 +11,8 @@ namespace Paymetheus.ViewModels
 {
     sealed class RecentAccountViewModel : ViewModelBase
     {
-        public RecentAccountViewModel(ViewModelBase parent, Account account, AccountProperties properties)
-            : base(parent)
+        public RecentAccountViewModel(Account account, AccountProperties properties) : base()
         {
-            if (parent == null)
-                throw new ArgumentNullException(nameof(parent));
             if (properties == null)
                 throw new ArgumentNullException(nameof(properties));
 

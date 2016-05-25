@@ -18,8 +18,7 @@ namespace Paymetheus.ViewModels
 {
     sealed class AccountViewModel : ViewModelBase
     {
-        public AccountViewModel(ShellViewModel shell, Wallet wallet, Account account)
-            : base(shell)
+        public AccountViewModel(Wallet wallet, Account account) : base()
         {
             _wallet = wallet;
             _account = account;
@@ -95,16 +94,18 @@ namespace Paymetheus.ViewModels
 
         private void RenameAcountAction()
         {
-            var dialog = new RenameAccountDialogViewModel((ShellViewModel)_parentViewModel, _account, _wallet.AccountName(_account));
+            var dialog = new RenameAccountDialogViewModel(_account, _wallet.AccountName(_account));
             var message = new OpenDialogMessage(dialog);
-            PostMessage(message);
+            throw new NotImplementedException();
+            //PostMessage(message);
         }
 
         private void ImportKeyAction()
         {
-            var dialog = new ImportDialogViewModel((ShellViewModel)_parentViewModel, _account);
+            var dialog = new ImportDialogViewModel(_account);
             var message = new OpenDialogMessage(dialog);
-            PostMessage(message);
+            throw new NotImplementedException();
+            //PostMessage(message);
         }
         #endregion
 
@@ -376,10 +377,13 @@ namespace Paymetheus.ViewModels
                         var script = po.BuildOutputScript().Script;
                         return new Transaction.Output(po.OutputAmount, Transaction.Output.LatestPkScriptVersion, script);
                     }).ToArray();
+                    throw new NotImplementedException();
+                    /*
                     var shell = (ShellViewModel)_parentViewModel;
                     Func<string, Task> action = (passphrase) => SignTransactionWithPassphrase(passphrase, outputs, PublishTransaction);
                     var dialog = new PassphraseDialogViewModel(shell, "Enter passphrase to sign transaction", "Sign", action);
                     PostMessage(new OpenDialogMessage(dialog));
+                    */
                 }
                 else
                 {

@@ -11,8 +11,7 @@ namespace Paymetheus.ViewModels
 {
     sealed class RenameAccountDialogViewModel : DialogViewModelBase
     {
-        public RenameAccountDialogViewModel(ShellViewModel shell, Account account, string currentName)
-            : base(shell)
+        public RenameAccountDialogViewModel(Account account, string currentName) : base()
         {
             _account = account;
             _rename = new DelegateCommand(RenameAction);

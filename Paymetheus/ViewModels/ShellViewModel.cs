@@ -32,7 +32,7 @@ namespace Paymetheus.ViewModels
 
             CreateAccountCommand = new DelegateCommand(CreateAccount);
 
-            _overviewViewModel = new OverviewViewModel(this);
+            _overviewViewModel = new OverviewViewModel();
             SingletonViewModelLocator.RegisterInstance<Overview>(_overviewViewModel);
 
             StartupWizard = new StartupWizard(this);
@@ -236,19 +236,18 @@ namespace Paymetheus.ViewModels
 
         private void CreateAccount()
         {
-            VisibleDialogContent = new CreateAccountDialogViewModel(this);
+            VisibleDialogContent = new CreateAccountDialogViewModel();
         }
 
+#if false
         protected override bool OnRoutedMessage(ViewModelBase sender, ViewModelMessageBase message)
         {
-#if false
             var openDialog = message as OpenDialogMessage;
             if (openDialog != null && sender == VisibleContent)
             {
                 VisibleDialogContent = openDialog.Dialog;
                 return true;
             }
-#endif
 
             var hideDialog = message as HideDialogMessage;
             if (hideDialog != null && sender == VisibleDialogContent)
@@ -259,6 +258,7 @@ namespace Paymetheus.ViewModels
 
             return false;
         }
+#endif
 
         private void ShowTransaction(TransactionViewModel tx)
         {

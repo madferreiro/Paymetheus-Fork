@@ -8,8 +8,6 @@ namespace Paymetheus.ViewModels
 {
     internal class OverviewViewModel : ViewModelBase
     {
-        public OverviewViewModel(ShellViewModel shell) : base(shell) { }
-
         private int _accountsCount;
         public int AccountsCount
         {

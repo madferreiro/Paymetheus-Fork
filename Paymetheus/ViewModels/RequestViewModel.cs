@@ -12,7 +12,7 @@ namespace Paymetheus.ViewModels
 {
     sealed class RequestViewModel : ViewModelBase
     {
-        public RequestViewModel(ShellViewModel shell) : base(shell)
+        public RequestViewModel() : base()
         {
             _generateAddressCommand = new DelegateCommand(GenerateAddressAction);
         }

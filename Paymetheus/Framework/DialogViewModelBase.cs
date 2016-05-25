@@ -2,13 +2,14 @@
 // Copyright (c) 2016 The Decred developers
 // Licensed under the ISC license.  See LICENSE file in the project root for full license information.
 
+using System;
 using System.Windows.Input;
 
 namespace Paymetheus.Framework
 {
     public class DialogViewModelBase : ViewModelBase
     {
-        public DialogViewModelBase(ShellViewModelBase shell) : base(shell)
+        public DialogViewModelBase() : base()
         {
             HideDialogCommand = new DelegateCommand(HideDialog);
         }
@@ -17,7 +18,7 @@ namespace Paymetheus.Framework
 
         public void HideDialog()
         {
-            PostMessage(new HideDialogMessage());
+            throw new NotImplementedException();
         }
     }
 }

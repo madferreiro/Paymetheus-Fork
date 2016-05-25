@@ -15,7 +15,7 @@ namespace Paymetheus
 {
     sealed class StartupWizard : WizardViewModelBase
     {
-        public StartupWizard(ShellViewModelBase shell) : base(shell)
+        public StartupWizard(ShellViewModelBase shell) : base()
         {
             CurrentDialog = new ConsensusServerRpcConnectionDialog(this);
             Shell = shell;
