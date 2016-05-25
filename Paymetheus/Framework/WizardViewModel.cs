@@ -4,7 +4,7 @@
 
 namespace Paymetheus.Framework
 {
-    class WizardViewModelBase : ViewModelBase
+    public class WizardViewModelBase : ViewModelBase
     {
         private WizardDialogViewModelBase _currentDialog;
         public WizardDialogViewModelBase CurrentDialog

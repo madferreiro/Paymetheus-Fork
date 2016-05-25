@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Paymetheus.ViewModels
 {
-    sealed class RequestViewModel : ViewModelBase
+    public sealed class RequestViewModel : ViewModelBase
     {
         public RequestViewModel() : base()
         {

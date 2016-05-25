@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace Paymetheus.ViewModels
 {
-    sealed class ShellViewModel : ShellViewModelBase
+    public sealed class ShellViewModel : ShellViewModelBase
     {
         public ShellViewModel()
         {
@@ -139,13 +139,13 @@ namespace Paymetheus.ViewModels
 
         private void _wallet_ChangesProcessed(object sender, Wallet.ChangesProcessedEventArgs e)
         {
-            var currentHeight = e.NewChainTip?.Height ?? SyncedBlockHeight;
-
             // TODO: The OverviewViewModel should probably connect to this event.  This could be
             // done after the wallet is synced.
-            var overviewViewModel = SingletonViewModelLocator.Resolve("Overview") as OverviewViewModel;
+            var overviewViewModel = ViewModelLocator.OverviewViewModel;
             if (overviewViewModel != null)
             {
+                var currentHeight = e.NewChainTip?.Height ?? SyncedBlockHeight;
+
                 var movedTxViewModels = overviewViewModel.RecentTransactions
                     .Where(txvm => e.MovedTransactions.ContainsKey(txvm.TxHash))
                     .Select(txvm => Tuple.Create(txvm, e.MovedTransactions[txvm.TxHash]));

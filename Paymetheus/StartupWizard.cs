@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace Paymetheus
 {
-    sealed class StartupWizard : WizardViewModelBase
+    public sealed class StartupWizard : WizardViewModelBase
     {
         public StartupWizard(ShellViewModelBase shell) : base()
         {

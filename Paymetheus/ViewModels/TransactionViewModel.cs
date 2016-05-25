@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Paymetheus.ViewModels
 {
-    sealed class TransactionViewModel : ViewModelBase
+    public sealed class TransactionViewModel : ViewModelBase
     {
         public TransactionViewModel(Wallet wallet, WalletTransaction transaction, BlockIdentity transactionLocation)
         {

@@ -7,7 +7,8 @@ namespace Paymetheus.ViewModels
 {
     public class ViewModelLocator
     {
-        public object ShellViewModel => SingletonViewModelLocator.Resolve("ShellView");
-        public object OverviewViewModel => SingletonViewModelLocator.Resolve("Overview");
+        public static ShellViewModel ShellViewModel => SingletonViewModelLocator.Resolve("ShellView") as ShellViewModel;
+        public static OverviewViewModel OverviewViewModel => SingletonViewModelLocator.Resolve("Overview") as OverviewViewModel;
+        public static RequestViewModel RequestViewModel => SingletonViewModelLocator.Resolve("Request") as RequestViewModel;
     }
 }

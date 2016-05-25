@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace Paymetheus.ViewModels
 {
-    internal class OverviewViewModel : ViewModelBase
+    public class OverviewViewModel : ViewModelBase
     {
         private int _accountsCount;
         public int AccountsCount
