@@ -187,7 +187,7 @@
     <Compile Include="Send.xaml.cs">
       <DependentUpon>Send.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartupWizard.cs" />
+    <Compile Include="ViewModels\StartupWizard.cs" />
     <Compile Include="ConnectionWizardView.xaml.cs">
       <DependentUpon>ConnectionWizardView.xaml</DependentUpon>
     </Compile>
@@ -198,26 +198,14 @@
     <Compile Include="Framework\DelegateCommand.cs" />
     <Compile Include="Framework\ValueConverters\BooleanConverter.cs" />
     <Compile Include="Framework\ButtonCommand.cs" />
-    <Compile Include="ConfirmationIndicator.xaml.cs">
-      <DependentUpon>ConfirmationIndicator.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Framework\DialogViewModelBase.cs" />
-    <Compile Include="ImportDialogView.xaml.cs">
-      <DependentUpon>ImportDialogView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\ImportDialogViewModel.cs" />
-    <Compile Include="PassphraseDialogView.xaml.cs">
-      <DependentUpon>PassphraseDialogView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\PassphraseDialogViewModel.cs" />
     <Compile Include="PromptPassphrasesView.xaml.cs">
       <DependentUpon>PromptPassphrasesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="PublicPassphrasePromptView.xaml.cs">
       <DependentUpon>PublicPassphrasePromptView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RenameAccountDialogView.xaml.cs">
-      <DependentUpon>RenameAccountDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\RenameAccountDialogViewModel.cs" />
     <Compile Include="ShellView.xaml.cs">
@@ -226,9 +214,6 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\RecentAccountViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
-    <Compile Include="TransactionView.xaml.cs">
-      <DependentUpon>TransactionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ConsensusServerConnectionOptionsView.xaml.cs">
       <DependentUpon>ConsensusServerConnectionOptionsView.xaml</DependentUpon>
     </Compile>
@@ -258,10 +243,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ConfirmationIndicator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ConfirmSeedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,10 +263,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ImportDialogView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Overview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -294,19 +271,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PassphraseDialogView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PromptPassphrasesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PublicPassphrasePromptView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RenameAccountDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,10 +307,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TransactionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ConsensusServerConnectionOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

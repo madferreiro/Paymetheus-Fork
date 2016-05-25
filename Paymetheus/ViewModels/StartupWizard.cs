@@ -11,7 +11,7 @@ using System;
 using System.IO;
 using System.Windows;
 
-namespace Paymetheus
+namespace Paymetheus.ViewModels
 {
     public sealed class StartupWizard : WizardViewModelBase
     {

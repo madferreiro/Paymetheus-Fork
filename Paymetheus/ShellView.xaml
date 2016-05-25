@@ -13,15 +13,6 @@
         <DataTemplate DataType="{x:Type viewmodels:CreateAccountDialogViewModel}">
             <local:CreateAccountDialogView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:RenameAccountDialogViewModel}">
-            <local:RenameAccountDialogView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ImportDialogViewModel}">
-            <local:ImportDialogView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:PassphraseDialogViewModel}">
-            <local:PassphraseDialogView/>
-        </DataTemplate>
         <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
         <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
         <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
