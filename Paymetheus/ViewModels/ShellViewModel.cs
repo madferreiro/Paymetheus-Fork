@@ -32,17 +32,12 @@ namespace Paymetheus.ViewModels
 
             CreateAccountCommand = new DelegateCommand(CreateAccount);
 
-            _overviewViewModel = new OverviewViewModel();
-            SingletonViewModelLocator.RegisterInstance<Overview>(_overviewViewModel);
-
             StartupWizard = new StartupWizard(this);
             StartupWizard.WalletOpened += StartupWizard_WalletOpened;
             StartupWizardVisible = true;
         }
 
         private Wallet _wallet;
-        public readonly OverviewViewModel _overviewViewModel;
-        private AccountViewModel _accountViewModel;
 
         public string WindowTitle { get; }
 
@@ -111,11 +106,12 @@ namespace Paymetheus.ViewModels
                 .Select(x => new TransactionViewModel(_wallet, x.Value, BlockIdentity.Unmined))
                 .Concat(txSet.MinedTransactions.ReverseList().SelectMany(b => b.Transactions.Select(tx => new TransactionViewModel(_wallet, tx, b.Identity))))
                 .Take(10);
-            _overviewViewModel.AccountsCount = _wallet.EnumrateAccounts().Count();
+            var overviewViewModel = (OverviewViewModel)SingletonViewModelLocator.Resolve("Overview");
+            overviewViewModel.AccountsCount = _wallet.EnumrateAccounts().Count();
             Application.Current.Dispatcher.Invoke(() =>
             {
                 foreach (var tx in recentTx)
-                    _overviewViewModel.RecentTransactions.Add(tx);
+                    overviewViewModel.RecentTransactions.Add(tx);
             });
             SyncedBlockHeight = _wallet.ChainTip.Height;
             NotifyRecalculatedBalances();
@@ -145,13 +141,34 @@ namespace Paymetheus.ViewModels
         {
             var currentHeight = e.NewChainTip?.Height ?? SyncedBlockHeight;
 
-            var movedTxViewModels = _overviewViewModel.RecentTransactions
-                .Where(txvm => e.MovedTransactions.ContainsKey(txvm.TxHash))
-                .Select(txvm => Tuple.Create(txvm, e.MovedTransactions[txvm.TxHash]));
+            // TODO: The OverviewViewModel should probably connect to this event.  This could be
+            // done after the wallet is synced.
+            var overviewViewModel = SingletonViewModelLocator.Resolve("Overview") as OverviewViewModel;
+            if (overviewViewModel != null)
+            {
+                var movedTxViewModels = overviewViewModel.RecentTransactions
+                    .Where(txvm => e.MovedTransactions.ContainsKey(txvm.TxHash))
+                    .Select(txvm => Tuple.Create(txvm, e.MovedTransactions[txvm.TxHash]));
 
-            var newTxViewModels = e.AddedTransactions.Select(tx => new TransactionViewModel(_wallet, tx.Item1, tx.Item2)).ToList();
+                var newTxViewModels = e.AddedTransactions.Select(tx => new TransactionViewModel(_wallet, tx.Item1, tx.Item2)).ToList();
 
-            RaisePropertyChanged(nameof(TotalBalance));
+                foreach (var movedTx in movedTxViewModels)
+                {
+                    var txvm = movedTx.Item1;
+                    var location = movedTx.Item2;
+
+                    txvm.Location = location;
+                    txvm.Confirmations = BlockChain.Confirmations(currentHeight, location);
+                }
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    foreach (var txvm in newTxViewModels)
+                    {
+                        overviewViewModel.RecentTransactions.Insert(0, txvm);
+                    }
+                });
+            }
 
 #if false
             if (VisibleContent is AccountViewModel)
@@ -164,23 +181,7 @@ namespace Paymetheus.ViewModels
                 }
             }
 #endif
-
-            foreach (var movedTx in movedTxViewModels)
-            {
-                var txvm = movedTx.Item1;
-                var location = movedTx.Item2;
-
-                txvm.Location = location;
-                txvm.Confirmations = BlockChain.Confirmations(currentHeight, location);
-            }
-
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                foreach (var txvm in newTxViewModels)
-                {
-                    _overviewViewModel.RecentTransactions.Insert(0, txvm);
-                }
-            });
+            RaisePropertyChanged(nameof(TotalBalance));
 
             if (e.NewChainTip != null)
             {

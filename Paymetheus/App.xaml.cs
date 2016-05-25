@@ -29,6 +29,7 @@ namespace Paymetheus
             InitializeComponent();
 
             SingletonViewModelLocator.RegisterFactory<ShellView, ShellViewModel>();
+            SingletonViewModelLocator.RegisterFactory<Overview, OverviewViewModel>();
 
             Application.Current.Dispatcher.UnhandledException += (sender, args) =>
             {
