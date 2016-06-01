@@ -122,8 +122,8 @@ namespace Paymetheus.ViewModels
         {
             RaisePropertyChanged(nameof(TotalBalance));
 
-            // If account visible, calculate spendable balance
 #if false
+            // If account visible, calculate spendable balance
             if (_visibleContent is AccountViewModel)
             {
                 var accountViewModel = (AccountViewModel)_visibleContent;
@@ -260,15 +260,5 @@ namespace Paymetheus.ViewModels
             return false;
         }
 #endif
-
-        private void ShowTransaction(TransactionViewModel tx)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ShowAccount(Account account)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
