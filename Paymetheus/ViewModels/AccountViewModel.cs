@@ -18,11 +18,10 @@ namespace Paymetheus.ViewModels
 {
     sealed class AccountViewModel : ViewModelBase
     {
-        public AccountViewModel(Wallet wallet, Account account) : base()
+        public AccountViewModel(Account account, AccountProperties properties) : base()
         {
-            _wallet = wallet;
             _account = account;
-            _accountProperties = _wallet.LookupAccountProperties(_account);
+            _accountProperties = properties;
             UpdateAccountProperties(1, _accountProperties); // TODO: Don't hardcode confs
 
             RenameAccount = new DelegateCommand(RenameAcountAction);

@@ -17,10 +17,6 @@ namespace Paymetheus.ViewModels
             _generateAddressCommand = new DelegateCommand(GenerateAddressAction);
         }
 
-        // TODO: This should be moved to the shell (or some other global context), as well as the
-        // active account. Changing the active account in one place should change it everywhere.
-        private List<string> _accountNames = new List<string>();
-
         private string _generatedAddress;
         public string GeneratedAddress
         {

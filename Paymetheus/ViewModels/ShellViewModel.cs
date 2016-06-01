@@ -7,6 +7,8 @@ using Paymetheus.Decred.Wallet;
 using Paymetheus.Framework;
 using Paymetheus.Rpc;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -107,7 +109,7 @@ namespace Paymetheus.ViewModels
                 .Concat(txSet.MinedTransactions.ReverseList().SelectMany(b => b.Transactions.Select(tx => new TransactionViewModel(_wallet, tx, b.Identity))))
                 .Take(10);
             var overviewViewModel = (OverviewViewModel)SingletonViewModelLocator.Resolve("Overview");
-            overviewViewModel.AccountsCount = _wallet.EnumrateAccounts().Count();
+            overviewViewModel.AccountsCount = _wallet.EnumerateAccounts().Count();
             Application.Current.Dispatcher.Invoke(() =>
             {
                 foreach (var tx in recentTx)
@@ -232,6 +234,8 @@ namespace Paymetheus.ViewModels
         }
 
         public Amount TotalBalance => _wallet?.TotalBalance ?? 0;
+
+        public ObservableCollection<Account> AccountNames { get; } = new ObservableCollection<Account>();
 
         public ICommand CreateAccountCommand { get; }
 
