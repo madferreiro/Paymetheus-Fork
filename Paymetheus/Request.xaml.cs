@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paymetheus.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace Paymetheus
         public Request()
         {
             InitializeComponent();
+        }
+
+        private void buttonGenerate_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateAnotherBtn.Visibility = Visibility.Visible;
+            ButtonGenerate.Visibility = Visibility.Hidden;
+            ButtonGenerate.Command = null;
+            RectangleGenerate.Visibility = Visibility.Visible;
+            LblCode.Visibility = Visibility.Visible;
+            var viewmodel = (RequestViewModel)ViewModelLocator.RequestViewModel;
+            viewmodel.GenerateAddressAction();
         }
     }
 }

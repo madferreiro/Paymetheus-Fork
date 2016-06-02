@@ -1,5 +1,6 @@
 ﻿using Paymetheus.DTO;
 using Paymetheus.Framework;
+using Paymetheus.ViewModels;
 using System;
 using System.Collections.Generic;
 
@@ -22,6 +23,14 @@ namespace Paymetheus
         {
             var selectedItem = (RecentActivity)lstRecentActivity.SelectedItem;
             Navigator.GetInstance().NavigateTo(new OverviewDeeper(selectedItem));
+        }
+        
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var overviewViewModel = (OverviewViewModel)ViewModelLocator.OverviewViewModel;
+            var shellViewModel = (ShellViewModel)ViewModelLocator.ShellViewModel;
+            overviewViewModel.RecentTransactions.Add(shellViewModel.TransactionViewModel);
+            return;
         }
     }
 }

@@ -20,9 +20,9 @@ namespace Paymetheus.Decred
 
             if (tx.Inputs.Length != 1)
                 return false;
-
             var previousOutput = tx.Inputs[0].PreviousOutpoint;
             return previousOutput.Index == uint.MaxValue && previousOutput.Hash.Equals(Blake256Hash.Zero);
+            
         }
 
         public static int Confirmations(int blockChainHeight, BlockIdentity location)

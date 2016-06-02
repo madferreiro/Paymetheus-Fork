@@ -31,7 +31,7 @@ namespace Paymetheus.ViewModels
         private DelegateCommand _generateAddressCommand;
         public ICommand GenerateAddressCommand => _generateAddressCommand;
 
-        private async void GenerateAddressAction()
+        public async void GenerateAddressAction()
         {
             try
             {

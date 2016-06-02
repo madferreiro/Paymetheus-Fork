@@ -39,6 +39,13 @@ namespace Paymetheus.ViewModels
 
         private Wallet _wallet;
 
+        public TransactionViewModel TransactionViewModel {
+            get
+            {
+                return new TransactionViewModel(_wallet, null, new BlockIdentity()); { };
+            }
+        }
+
         public string WindowTitle { get; }
 
         private DialogViewModelBase _visibleDialogContent;

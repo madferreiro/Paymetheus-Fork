@@ -17,7 +17,6 @@ namespace Paymetheus.ViewModels
         {
             _transaction = transaction;
             _location = transactionLocation;
-
             var groupedOutputs = _transaction.NonChangeOutputs.Select(o =>
             {
                 var destination = wallet.OutputDestination(o);
@@ -32,7 +31,6 @@ namespace Paymetheus.ViewModels
 
                 return items;
             });
-
             Confirmations = BlockChain.Confirmations(wallet.ChainTip.Height, transactionLocation);
             Inputs = _transaction.Inputs.Select(input => new Input(-input.Amount, wallet.AccountName(input.PreviousAccount))).ToArray();
             Outputs = _transaction.Outputs.Select(output => new Output(output.Amount, wallet.OutputDestination(output))).ToArray();
