@@ -318,6 +318,50 @@ namespace Paymetheus.Decred.Wallet
             return balance;
         }
 
+        // TODO: This only supports BIP0032 accounts currently (NOT the imported account).
+        // Results are indexed by their account number.
+        // TODO: set locked balances
+        public Balances[] CalculateBalances(int requiredConfirmations)
+        {
+            var balances = _bip0032Accounts.Select(a => new Balances(a.TotalBalance, 0, 0)).ToArray();
+
+            if (requiredConfirmations == 0)
+            {
+                return balances;
+            }
+
+            var controlledUnminedOutputs = RecentTransactions.UnminedTransactions
+                .SelectMany(kvp => kvp.Value.Outputs)
+                .OfType<WalletTransaction.Output.ControlledOutput>()
+                .Where(a => a.Account.AccountNumber != ImportedAccountNumber); // Imported is not reported currently.
+            foreach (var unminedOutput in controlledUnminedOutputs)
+            {
+                var accountNumber = unminedOutput.Account.AccountNumber;
+                balances[checked((int)accountNumber)].SpendableBalance -= unminedOutput.Amount;
+            }
+
+            if (requiredConfirmations == 1)
+            {
+                return balances;
+            }
+
+            var confHeight = BlockChain.ConfirmationHeight(ChainTip.Height, requiredConfirmations);
+            foreach (var block in RecentTransactions.MinedTransactions.ReverseList().TakeWhile(b => b.Height >= confHeight))
+            {
+                var controlledMinedOutputs = block.Transactions
+                    .SelectMany(tx => tx.Outputs)
+                    .OfType<WalletTransaction.Output.ControlledOutput>()
+                    .Where(a => a.Account.AccountNumber != ImportedAccountNumber); // Imported is not reported currently.
+                foreach (var output in controlledMinedOutputs)
+                {
+                    var accountNumber = output.Account.AccountNumber;
+                    balances[checked((int)accountNumber)].SpendableBalance -= output.Amount;
+                }
+            }
+
+            return balances;
+        }
+
         public string OutputDestination(WalletTransaction.Output output)
         {
             if (output == null)
