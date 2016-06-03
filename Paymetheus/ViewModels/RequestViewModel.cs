@@ -15,11 +15,22 @@ namespace Paymetheus.ViewModels
         public RequestViewModel() : base()
         {
             _generateAddressCommand = new DelegateCommand(GenerateAddressAction);
+            HideWhenNoAddressToDisplay = Visibility.Hidden;
+            HideIfAddressToDisplay = Visibility.Visible;
         }
 
-        // TODO: This should be moved to the shell (or some other global context), as well as the
-        // active account. Changing the active account in one place should change it everywhere.
-        private List<string> _accountNames = new List<string>();
+        private Visibility _hideWhenNoAddressToDisplay;
+        public Visibility HideWhenNoAddressToDisplay
+        {
+            get { return _hideWhenNoAddressToDisplay; }
+            set { _hideWhenNoAddressToDisplay = value; RaisePropertyChanged(); }
+        }
+        private Visibility _hideIfAddressToDisplay;
+        public Visibility HideIfAddressToDisplay
+        {
+            get { return _hideIfAddressToDisplay; }
+            set { _hideIfAddressToDisplay = value; RaisePropertyChanged(); }
+        }
 
         private string _generatedAddress;
         public string GeneratedAddress
@@ -33,6 +44,8 @@ namespace Paymetheus.ViewModels
 
         public async void GenerateAddressAction()
         {
+            HideWhenNoAddressToDisplay = Visibility.Visible;
+            HideIfAddressToDisplay = Visibility.Hidden;
             try
             {
                 _generateAddressCommand.Executable = false;
